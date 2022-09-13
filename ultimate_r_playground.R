@@ -81,15 +81,33 @@ for(i in 3:10)
   # }
   
   
-  ### Time to begin processing 
+  ### Retrieve the shp_file that was saved above and read that into boundary variable
+  # I have no idea why the naming standard has the users use the term "HARV" but here we are
+  road_boundary_HARV <-  st_read(shp_file)
   
+  # Retrieve geometry attributes from road_boundary_HARV for processing
+  sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
+  
+  # Verify the calculation of lengths and intersections within the shapefile
+  attributes(sd)
+  st_length(sd) # - shows distance in meters
+  st_intersects(sd) # shows number of intersects
 
-  shp_file
-  class(shp_file)
-  aoi_boundary_HARV <- shp_file
-
-
-
+  # Process the length of each individual 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
