@@ -88,4 +88,8 @@ for(i in 3:10)
   class(shp_file)
   aoi_boundary_HARV <- shp_file
 
+
+
+
 }
+
