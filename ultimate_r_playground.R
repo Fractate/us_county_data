@@ -15,10 +15,7 @@ download_file_name <- "tl_2020_01011_roads.zip"
 # check for all of the data entries found in census website
 # check for all of the shape file in the computer
 # for missing shape files, download and extract
-
-shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
-
-html <- read_html(shapefile_2020_website_text)
+html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
 
 class(html)
 html
@@ -38,7 +35,7 @@ for(i in 3:10)
   print(a)
   
   # Extrapolate file level directory information for each row found from US Census Tiger data
-  origin_website_zip_file_link <- paste(shapefile_2020_website_text, a, sep = "")
+  origin_website_zip_file_link <- paste(shapefile_2020_website_link, a, sep = "")
   zip_file_name_converted_to_shp <- paste(file_path_sans_ext(a), ".shp", sep="") # shp and shx files must be used in tandem
   zip_file_name_converted_to_shx <- paste(file_path_sans_ext(a), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
 
