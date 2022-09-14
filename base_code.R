@@ -15,6 +15,7 @@ print(tiger_county_list)
 
 # 2) Get population for each of the counties
 
+
 # 3) Get all of the roads data including length and intersections
 
 # 4) Get the total area of each of the counties

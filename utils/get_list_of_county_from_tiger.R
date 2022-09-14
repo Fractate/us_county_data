@@ -9,7 +9,7 @@ get_county_list <- function(website_link) {
 
     
     # for(i in 3:3){
-    #     a <- tiger_county_list[i,2] # returns column of zip file names found in the US Census Tiger data
+    #     a <- tiger_county_list[i,2] # returns column of zip file names found in the .  US Census Tiger data
     #     print(a)
     # }
 
@@ -26,8 +26,16 @@ get_county_list <- function(website_link) {
     # Beginning and ending points of the counties list is hard coded
     for(i in 3:3234){
         a <- tiger_county_list[i,2] # returns column of zip file names found in the US Census Tiger data
-        out <- c(a, str_sub(a, 9, 14))
+        a
+        str_sub(a, 9, 14)
+        # out <- c(a, str_sub(a, 9, 13))
+        # out <- c(out, c(a, str_sub(a, 9, 13)))
+        out <- c(out, str_sub(a, 9, 13))
     }
-
+    class(out)
+    head(out)
+    tail(out)
+    View(out)
+  
     return(out)
 }
