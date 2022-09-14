@@ -17,20 +17,16 @@ download_file_name <- "tl_2020_01011_roads.zip"
 # for missing shape files, download and extract
 html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
 
-class(html)
-html
-
-class(html)
 table2 <- html %>% html_element("table") %>% html_table()
 # make sure right entries are selected from table2 is not being done because i'm too lazy
 # Can follow up with a try statement and/or hard code to skip first and last parts that have invalid data
 
-for(i in 3:10)
+for(i in 3:10) {
 # for(i in 3:nrow(table2))
 ### Returns the total number of rows found in census tiger website
 # nrow(table2)
 ###
-{
+
   a <- table2[i,2] # returns column of zip file names found in the US Census Tiger data
   print(a)
   
