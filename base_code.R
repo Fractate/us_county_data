@@ -35,23 +35,34 @@ data(df_county_pop)
 attributes(df_county_pop)
 colnames(df_county_pop) 
 
-dfnew4 <- df_county_pop[,c("GEOID", "NAME", "value")]
-
-print(dfnew4)
-
-
-df_lj <- left_join(df, dfnew4, by = c("X[[i]]"="GEOID"))
-
-print(df_lj)
+df_county_pop_cropped <- df_county_pop[,c("GEOID", "NAME", "value")]
 
 # 2.1) Filter for the counties that match between the list of county population and county tiger files and populate population column
+df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
 
-
+print(df_lj)
 # 3) Get all of the roads data including length and intersections
+# add a column to df_lj to house total length and intersections
+
+# a for loop will be needed for data retrieval per each county
+
 
 # 4) Get the total area of each of the counties
+# Retrieve total area for each county
 
 # 5) Do Analysis
+# at this point, there should be a dataframe with population, length of road, total intersections between the roads, total land area of each county
 
 
 ## The census data align at the county level by using County FIPS Codes. This is the State Code + County Code for 5 digit number
+
+
+
+
+
+
+
+
+
+
+
