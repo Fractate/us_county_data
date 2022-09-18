@@ -34,13 +34,13 @@ for(i in 3:10)
 # nrow(table2)
 ###
 {
-  a <- table2[i,2] # returns column of zip file names found in the US Census Tiger data
-  print(a)
+  row_zip_file_name <- table2[i,2] # returns column of zip file names found in the US Census Tiger data
+  print(row_zip_file_name)
   
   # Extrapolate file level directory information for each row found from US Census Tiger data
-  origin_website_zip_file_link <- paste(shapefile_2020_website_text, a, sep = "")
-  zip_file_name_converted_to_shp <- paste(file_path_sans_ext(a), ".shp", sep="") # shp and shx files must be used in tandem
-  zip_file_name_converted_to_shx <- paste(file_path_sans_ext(a), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
+  origin_website_zip_file_link <- paste(shapefile_2020_website_text, row_zip_file_name, sep = "")
+  zip_file_name_converted_to_shp <- paste(file_path_sans_ext(row_zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
+  zip_file_name_converted_to_shx <- paste(file_path_sans_ext(row_zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
 
   ## Obsolete because code now uses default directory
   # verification_of_shp_file_path <- paste(download_directory, zip_file_name_converted_to_shp, sep="")

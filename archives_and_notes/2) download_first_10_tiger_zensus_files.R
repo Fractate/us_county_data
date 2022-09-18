@@ -63,14 +63,14 @@ for(i in 3:10)
   # a <- grep("One", names(table2[[i]]))
   # ... #etc.
   # print("flag3")
-  a <- table2[i,2]
-  print(a)
+  row_zip_file_name <- table2[i,2]
+  print(row_zip_file_name)
   
   
   # setting string variables
-  origin_website_zip_file_link <- paste(shapefile_2020_website_text, a, sep = "")
-  destination_zip_file_directory <-  paste(download_directory, a, sep = "")
-  zip_file_name_converted_to_shp <- paste(file_path_sans_ext(a), ".shp", sep="")
+  origin_website_zip_file_link <- paste(shapefile_2020_website_text, row_zip_file_name, sep = "")
+  destination_zip_file_directory <-  paste(download_directory, row_zip_file_name, sep = "")
+  zip_file_name_converted_to_shp <- paste(file_path_sans_ext(row_zip_file_name), ".shp", sep="")
   
   
   # https://stackoverflow.com/questions/3053833/using-r-to-download-zipped-data-file-extract-and-import-data
