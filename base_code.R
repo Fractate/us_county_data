@@ -1,7 +1,12 @@
 ### This code will run all of the appropriate calls later on
 
+source(".\\\\..\\utils\\setup_r_environment.R")
+
+env_setup()
+
 source(".\\\\..\\utils\\get_list_of_county_from_tiger.R")
 source(".\\\\..\\utils\\get_county_fips_population.R")
+source(".\\\\..\\utils\\get_county_road_data_tiger.R")
 
 # source(".\\\\..\\utils\\*")
 
@@ -57,11 +62,16 @@ df_lj[ , empty_cols] <- NA
 print("flag11")
 print(tail(df_lj))
 
-for(i in 1:nrow(df_lj)) {
+# for(i in 1:nrow(df_lj)) {
+for(i in 2:3) {
     # print(df_lj[i]['X.county_zip_file_name.'])
     # print(df_lj[i][value])
-    print(df_lj[i,2])
+    # print(i)
+    # print(df_lj[i,2])
+
+    # print(class(df_lj[i,]))
     # Set up new class to handle populating road lengths and number of intersections
+    get_county_road_data(df_lj[i,2], df_lj[i,5], df_lj[i,6])
 }
 
 # for(i in 1:ncol(df_lj)) {       # for-loop over columns
