@@ -62,8 +62,8 @@ df_lj[ , empty_cols] <- NA
 print("flag11")
 print(tail(df_lj))
 
-# for(i in 1:nrow(df_lj)) {
-for(i in 2:3) {
+for(i in 2:nrow(df_lj)) {
+# for(i in 2:3) {
     # print(df_lj[i]['X.county_zip_file_name.'])
     # print(df_lj[i][value])
     # print(i)
@@ -71,24 +71,16 @@ for(i in 2:3) {
 
     # print(class(df_lj[i,]))
     # Set up new class to handle populating road lengths and number of intersections
-    get_county_road_data(df_lj[i,2], df_lj[i,5], df_lj[i,6])
+    temp <- get_county_road_data(df_lj[i,2], df_lj[i,5], df_lj[i,6])
+    df_lj[i,5] <- temp[1]
+    df_lj[i,6] <- temp[2]
 }
 
-# for(i in 1:ncol(df_lj)) {       # for-loop over columns
-#   print(df_lj[ , i])
-# }
+print(head(df_lj))
+print(tail(df_lj))
+print(class(df_lj))
 
-
-# for (x in df_lj) {
-# #   print(x["X.county_zip_file_name."])
-#     print(x[[2]])
-# }
-# print("flag12")
-# # print(tail(df_lj))
-
-# # print(class(df_lj))
-# Sys.sleep()
-
+write.csv(df_lj,".\\export.csv", row.names = FALSE)
 
 # 4) Get the total area of each of the counties
 # Retrieve total area for each county

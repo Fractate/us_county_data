@@ -24,29 +24,30 @@ get_county_road_data <- function(zip_file_name, roads_length, intersections) {
     # I have no idea why the naming standard has the users use the term "HARV" but here we are
     road_boundary_HARV <-  st_read(shp_file)
 
-    # Retrieve geometry attributes from road_boundary_HARV for processing
+    # Retrieve geometry attributes from road_boundary_HARV for processing, crs sets the length to be base meters in north america
     sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
 
     # Verify the calculation of lengths and intersections within the shapefile
     st_area(sd) # this returns only 0 because shapefile only includes the vectors of the roads
     attributes(sd)
-    st_length(sd) # - shows distance in meters
-    print(st_length(sd)) # - shows distance in meters
-    print(class(st_length(sd))) # - shows distance in meters
-    st_intersects(sd) # shows number of intersects
-    print(st_intersects(sd)) # shows number of intersects
-    print(class(st_intersects(sd))) # shows number of intersects
-    # print(st_intersects(sd, sparse = FALSE)) # shows number of intersects
-    # print(class(st_intersects(sd, sparse = FALSE))) # shows number of intersects
+    # st_intersects(sd) # shows number of intersects
 
-    # https://cengel.github.io/R-spatial/spatialops.html
-
-
+    # # https://cengel.github.io/R-spatial/spatialops.html
     # todo: have a 2d dataframe to iterate through in order to gather information
     stint <- st_intersects(sd)
-    print("flagtest")
-    print(stint[0])
-    print(stint[1])
-    print(stint[2])
-    print("flagtest2")
+
+    total_intersects = 0
+    for(i in 1:nrow(stint)) {
+        for(j in 1:lengths(stint[i])) {
+            # if the intersection occurs with a road already considered, skip
+            # if the intersections occurs with new roads, increment total_intersects
+            if (stint[[i]][j] > i){
+                total_intersects = total_intersects + 1
+            }
+        }
+    }
+    roads_length <- sum(st_length(sd)) # - shows distance in meters
+    intersections <- total_intersects
+
+    return(c(as.numeric(roads_length), intersections))
 }
