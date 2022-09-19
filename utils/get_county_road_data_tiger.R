@@ -3,26 +3,44 @@
 # Function name is 
 get_county_road_data <- function(zip_file_name, roads_length, intersections) {
     
-    
-    shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
-    # destination_zip_file_directory <-  paste(download_directory, a, sep = "")
-    # Extrapolate file level directory information for each row found from US Census Tiger data
     origin_website_zip_file_link <- paste(shapefile_2020_website_text, zip_file_name, sep = "")
     zip_file_name_converted_to_shp <- paste(file_path_sans_ext(zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
     zip_file_name_converted_to_shx <- paste(file_path_sans_ext(zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
+    
+    # print(zip_file_name_converted_to_shp)
 
-    temp <- tempfile()
-    download.file(origin_website_zip_file_link, destfile = temp)
+    # road_boundary_HARV <- st_read(zip_file_name_converted_to_shp)
+    # road_boundary_HARV <- st_read('tl_2020_48441_roads.shp')
+    # road_boundary_HARV <- st_read('tl_2020_01001_roads.shp')
 
-    shp_file_from_zip <- unzip(temp, zip_file_name_converted_to_shp, list = FALSE)
-    shx_file_from_zip <- unzip(temp, zip_file_name_converted_to_shx, list = FALSE)
+    # print("test road_boundary_HARV")
+    # print(road_boundary_HARV)
+    # print(file.exists(zip_file_name_converted_to_shp))
+    # print(!file.exists(zip_file_name_converted_to_shp))
+    # print(file.exists('tl_2020_48441_roads.shp'))
+    # print(!file.exists('tl_2020_48441_roads.shp'))
+    # print(file.exists('tl_2020_01001_roads.shp'))
+    # print(!file.exists('tl_2020_01001_roads.shp'))
+    
+    # If file doesn't already exist then bring in & create file
+    if(!file.exists(zip_file_name_converted_to_shp)) {
+        shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
+        # destination_zip_file_directory <-  paste(download_directory, a, sep = "")
+        # Extrapolate file level directory information for each row found from US Census Tiger data
+        temp <- tempfile()
+        download.file(origin_website_zip_file_link, destfile = temp)
 
-    shp_file <- file_create(shp_file_from_zip)
-    file_create(shx_file_from_zip)
+        shp_file_from_zip <- unzip(temp, zip_file_name_converted_to_shp, list = FALSE)
+        shx_file_from_zip <- unzip(temp, zip_file_name_converted_to_shx, list = FALSE)
+
+        shp_file <- file_create(shp_file_from_zip)
+        file_create(shx_file_from_zip)
+    }
 
     ### Retrieve the shp_file that was saved above and read that into boundary variable
     # I have no idea why the naming standard has the users use the term "HARV" but here we are
-    road_boundary_HARV <-  st_read(shp_file)
+    # road_boundary_HARV <- st_read(shp_file)
+    road_boundary_HARV <- st_read(zip_file_name_converted_to_shp)
 
     # Retrieve geometry attributes from road_boundary_HARV for processing, crs sets the length to be base meters in north america
     sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
