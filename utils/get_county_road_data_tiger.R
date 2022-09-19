@@ -3,24 +3,10 @@
 # Function name is 
 get_county_road_data <- function(zip_file_name, roads_length, intersections) {
     
+    # Set naming string variables
     origin_website_zip_file_link <- paste(shapefile_2020_website_text, zip_file_name, sep = "")
     zip_file_name_converted_to_shp <- paste(file_path_sans_ext(zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
     zip_file_name_converted_to_shx <- paste(file_path_sans_ext(zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
-    
-    # print(zip_file_name_converted_to_shp)
-
-    # road_boundary_HARV <- st_read(zip_file_name_converted_to_shp)
-    # road_boundary_HARV <- st_read('tl_2020_48441_roads.shp')
-    # road_boundary_HARV <- st_read('tl_2020_01001_roads.shp')
-
-    # print("test road_boundary_HARV")
-    # print(road_boundary_HARV)
-    # print(file.exists(zip_file_name_converted_to_shp))
-    # print(!file.exists(zip_file_name_converted_to_shp))
-    # print(file.exists('tl_2020_48441_roads.shp'))
-    # print(!file.exists('tl_2020_48441_roads.shp'))
-    # print(file.exists('tl_2020_01001_roads.shp'))
-    # print(!file.exists('tl_2020_01001_roads.shp'))
     
     # If file doesn't already exist then bring in & create file
     if(!file.exists(zip_file_name_converted_to_shp)) {
