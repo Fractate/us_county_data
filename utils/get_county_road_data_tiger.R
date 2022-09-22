@@ -4,13 +4,13 @@
 get_county_road_data <- function(zip_file_name, roads_length, intersections) {
     
     # Set naming string variables
+    shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
     origin_website_zip_file_link <- paste(shapefile_2020_website_text, zip_file_name, sep = "")
     zip_file_name_converted_to_shp <- paste(file_path_sans_ext(zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
     zip_file_name_converted_to_shx <- paste(file_path_sans_ext(zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
     
     # If file doesn't already exist then bring in & create file
     if(!file.exists(zip_file_name_converted_to_shp)) {
-        shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
         # destination_zip_file_directory <-  paste(download_directory, a, sep = "")
         # Extrapolate file level directory information for each row found from US Census Tiger data
         temp <- tempfile()

@@ -1,3 +1,8 @@
+### Using Data from Bureau of Economic Analyis
+# Install package
+# install.packages('bea.R')
+library(bea.R)
+
 ### This code will run all of the appropriate calls later on
 source(".\\\\..\\utils\\setup_r_environment.R")
 env_setup()
@@ -15,7 +20,14 @@ library(fs) # file systems, allows the usage of file_create()
 library("stringr") # allows the use of "left" and "right" string manipulations
 library(tidyverse) # allows the usage of left_join
 
-if(!file.exists(zip_file_name_converted_to_shp)) {
+
+
+#   # Extrapolate file level directory information for each row found from US Census Tiger data
+#   origin_website_zip_file_link <- paste(shapefile_2020_website_link, a, sep = "")
+#   zip_file_name_converted_to_shp <- paste(file_path_sans_ext(a), ".shp", sep="") # shp and shx files must be used in tandem
+#   zip_file_name_converted_to_shx <- paste(file_path_sans_ext(a), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
+
+if(!file.exists("export.csv")) {
     tiger_county_list <- get_county_list()
 
     ## tiger_county_list should now be returned as dataframe by default so the lines below are not needed
@@ -69,6 +81,7 @@ if(!file.exists(zip_file_name_converted_to_shp)) {
 
 print("data1")
 data1 <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
+print(data1)
 print("data2")
 
 # 4) Get the total area of each of the counties
