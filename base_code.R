@@ -76,12 +76,48 @@ if(!file.exists("export.csv")) {
     print(tail(df_lj))
     print(class(df_lj))
 
+    colnames(df_lj) <- c("fips_id", "county_zip_file_name", "county_names", "population", "road_length_total", "intersections_total")
+    df_lj <- df_lj[-1,] # removing unnecessary row
+
     write.csv(df_lj,".\\export.csv", row.names = FALSE)
 }
 
-print("data1")
-data1 <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
-print(data1)
+### df_counties columns
+## defaults
+# fips_id
+# county_zip_file_name
+# county_names
+# population
+# road_length_total
+# intersections_total
+
+## geological data
+# how_much_land
+# how_much_water
+
+## building data (?)
+# houses_per_county
+# libraries per county
+# schools per county
+# firetrucks per county
+# post offices per county
+
+## demographics data (?)
+# racial_makeup
+# gender_makeup
+# age_group_makeup
+# total_population
+
+## economics data (?)
+# average income
+
+
+# read in cvs file to append additional columns
+df_counties <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
+print(head(data1))
+print(class(data1))
+
+
 print("data2")
 
 # 4) Get the total area of each of the counties
