@@ -3,7 +3,7 @@ library(rvest)
 library(tools)
 library("dplyr") # loading the required library for search() df
 
-# Function name is 
+# Function initialization
 get_county_land_water_areas <- function() {
 
   root_county_areas_2020_directory <- "https://tigerweb.geo.census.gov/tigerwebmain/"
@@ -15,7 +15,7 @@ get_county_land_water_areas <- function() {
   per_state_land_website <- html %>% html_elements("td") %>% html_element("a") %>% html_attr('href')
 
   # initialize empty dataframe for appending new data
-  df_states = data.frame()
+  df_states <- data.frame()
 
   for(i in per_state_land_website){
     # state_html <- read_html(paste(root_county_areas_2020_directory, i, sep=""))
@@ -28,11 +28,11 @@ get_county_land_water_areas <- function() {
   }
 
   # keep only the state, county, fips, area_land, area_water
-  df_output = df_states %>% select(c("STATE", "COUNTY", "AREALAND", "AREAWATER"))
+  df_output <- df_states %>% select(c("STATE", "COUNTY", "AREALAND", "AREAWATER"))
   colnames(df_output)  <- c("state", "county", "area_land", "area_water")
 
   # return dataframe
-  df_output <-df_output[order(df_output$state, df_output$county),]
+  df_output <- df_output[order(df_output$state, df_output$county),]
   # write.csv(df_output,".\\export2.csv", row.names = FALSE)
   return(df_output)
 }
