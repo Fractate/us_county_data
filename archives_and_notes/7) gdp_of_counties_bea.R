@@ -3,6 +3,7 @@ library(tidyverse)
 library(bea.R)
 
 source(".\\\\..\\utils\\setup_r_environment.R")
+# source(".\\utils\\setup_r_environment.R")
 
 # Setup API key
 beaKey <- beke
@@ -24,10 +25,12 @@ beaSpecs <- list(
 	'UserID' = beaKey ,
 	'Method' = 'GetData',
   'tablename' = 'CAGDP1',
+#   'tablename' = 'CAGDP2',
+#   'tablename' = 'CAGDP9',
 	'datasetname' = 'Regional',
 	'Year' = '2020',
 	'ResultFormat' = 'json',
-  'LineCode'='3',
+  'LineCode'='1',
   'GeoFIPS'='COUNTY'
 )
 beaPayload <- beaGet(beaSpecs)
