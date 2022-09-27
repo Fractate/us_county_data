@@ -82,6 +82,18 @@ if(!file.exists("export.csv")) {
     write.csv(df_lj,".\\export.csv", row.names = FALSE)
 }
 
+# Version 1 of the project will include the following
+# land area
+# water area
+# total road length - done
+# total road intersections - done
+# gdp per county
+# median income per county
+
+
+# version 2 can have long term consequences of unemployment and covid recovery rates
+
+
 # what data already exists in the system
 # https://ask.census.gov/prweb/PRServletCustom/app/ECORRAsk2_/YACFBFye-rFIz_FoGtyvDRUGg1Uzu5Mn*/!STANDARD?pzuiactionzzz=CXtpbn0rTEpMcGRYOG1vS0tqTFAwaENUZWpvM1NNWEMzZ3p5aFpnWUxzVmw0TjJqMkV0dXBFN09Jc3FNc3NFNmNaN25K*
 # County Business Patterns
