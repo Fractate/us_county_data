@@ -1,7 +1,7 @@
 # import util codes
 source(".\\\\..\\utils\\setup_r_environment.R")
 env_setup()
-source(".\\\\..\\utils\\get_list_of_county_from_tiger.R")
+source(".\\\\..\\utils\\get_county_list_road_data.R")
 source(".\\\\..\\utils\\get_county_gdps.R")
 source(".\\\\..\\utils\\get_county_poverty_and_med_income.R")
 source(".\\\\..\\utils\\get_county_land_water_areas.R")
