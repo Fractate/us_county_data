@@ -43,8 +43,8 @@ get_county_list <- function(enable_data_proc) {
         
         return(df_out)
 
-        # # get rid of unnecessary first row
-        # tiger_county_list <- tiger_county_list[-1,] # removing unnecessary row
+        # get rid of unnecessary first row
+        tiger_county_list <- tiger_county_list[-1,] # removing unnecessary row
 
         
         # for(i in 3:3){
