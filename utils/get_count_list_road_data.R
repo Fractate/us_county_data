@@ -2,7 +2,7 @@
 # https://www2.census.gov/geo/tiger/TIGER2020/ROADS/
 
 # Function name is 
-get_county_list <- function(enable_data_proc) {
+get_county_road_data <- function(enable_data_proc) {
     if(!file.exists("get_list_of_county_from_tiger.csv")) {
 
         html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
