@@ -1,12 +1,6 @@
-### Using Data from Bureau of Economic Analyis
-# Install package
-# install.packages('bea.R')
-library(bea.R)
-
-### This code will run all of the appropriate calls later on
+# import util codes
 source(".\\\\..\\utils\\setup_r_environment.R")
 env_setup()
-
 source(".\\\\..\\utils\\get_list_of_county_from_tiger.R")
 source(".\\\\..\\utils\\get_county_gdps.R")
 source(".\\\\..\\utils\\get_county_poverty_and_med_income.R")
@@ -14,8 +8,8 @@ source(".\\\\..\\utils\\get_county_land_water_areas.R")
 source(".\\\\..\\utils\\get_county_fips_population.R")
 source(".\\\\..\\utils\\get_county_road_data_tiger.R")
 
-# 1) Get a list of all the counties that need to be processed from the TIGER - roads map website
-
+# libraries
+library(bea.R) # Using Data from Bureau of Economic Analyis
 library(rvest)
 library(tools)
 library(sf) # zip and unzip files
@@ -23,62 +17,54 @@ library(fs) # file systems, allows the usage of file_create()
 library("stringr") # allows the use of "left" and "right" string manipulations
 library(tidyverse) # allows the usage of left_join
 
-# # Processes data download from tiger website
+# total road intersections - done
+# total road length - done
+df_county_roads <- get_county_list(enable_data_proc=TRUE)
 # get_county_list(enable_data_proc=FALSE)
 # processes data processing (downloaded files are automatically overlooked)
-# total road length - done
-# total road intersections - done
-df_county_roads <- get_county_list(enable_data_proc=TRUE)
 print(head(df_county_roads))
 print(tail(df_county_roads))
+print(names(df_county_roads)) # fips # county_zip_file_name # roads_length # intersections
 
-# 2) Get population for each of the counties
+# populations - done
 df_county_pop <- get_county_population()
 print(head(df_county_pop))
 print(tail(df_county_pop))
+print(names(df_county_pop)) # fips # countyname # population
 
 # land area - done
 # water area - done
 df_county_land_water_areas <- get_county_land_water_areas()
 print(head(df_county_land_water_areas))
 print(tail(df_county_land_water_areas))
-
+print(names(df_county_land_water_areas)) # state # county # area_land # area_water # fips
 
 # gdp per county - done
 df_county_gdps <- get_county_gdps()
 print(head(df_county_gdps))
 print(tail(df_county_gdps))
-
+print(names(df_county_gdps)) # fips # gdp_2020_usd2012value
 
 # median income & poverty per county - done
 df_county_poverty_and_med_income <- get_county_poverty_and_med_income()
 print(head(df_county_poverty_and_med_income))
 print(tail(df_county_poverty_and_med_income))
+print(names(df_county_poverty_and_med_income)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
 
-
-
-# # 3) Get all of the roads data including length and intersections
-
-
-
-# colnames(df_lj) <- c("fips_id", "county_zip_file_name", "county_names", "population", "road_length_total", "intersections_total")
-# df_lj <- df_lj[-1,] # removing unnecessary row
-
-# write.csv(df_lj,".\\export.csv", row.names = FALSE)
-
-
-
-
-# # # 2.1) Filter for the counties that match between the list of county population and county tiger files and populate population column
+### Joins
+print(tail('### Joins'))
+# # Filter for the counties that match between the list of county population and county tiger files and populate population column
 # # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
-# df_lj <- left_join(tiger_county_list, df_county_pop, by = c("X.fips_count_id."="GEOID"))
+# df_lj <- left_join(df_county_roads, df_county_pop, by = c("fips"="fips"))
+# df_lj <- left_join(df_lj, df_county_land_water_areas, by = c("fips"="fips"))
+# df_lj <- left_join(df_lj, df_county_gdps, by = c("fips"="fips"))
+# df_lj <- left_join(df_lj, df_county_poverty_and_med_income, by = c("fips"="fips"))
 
 # print(tail(tiger_county_list))
 # print(tail(df_county_pop))
 # print(tail(df_lj))
 
-
-
+# write.csv(df_lj,".\\export.csv", row.names = FALSE)
 
 # ## statistical analysis
 # # is there a way to put a number value to the road length, intersects, population count, total area and boil it down to a number

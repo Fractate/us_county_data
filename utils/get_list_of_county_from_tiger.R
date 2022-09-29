@@ -1,3 +1,4 @@
+# # Processes data download from tiger website
 # https://www2.census.gov/geo/tiger/TIGER2020/ROADS/
 
 # Function name is 
@@ -10,7 +11,7 @@ get_county_list <- function(enable_data_proc) {
 
         print(nrow(tiger_county_list)) # 3235 rows
 
-        df_out <- data.frame('fips_id', 'county_zip_file_name', 'roads_length', 'intersections')
+        df_output <- data.frame('fips', 'county_zip_file_name', 'roads_length', 'intersections')
         ## there is no data to be entered in the line below
         # df[ , empty_cols] <- NA
         print(tail(tiger_county_list))
@@ -29,19 +30,19 @@ get_county_list <- function(enable_data_proc) {
             print("temp")
             print(temp)
             print("names(df_out)")
-            print(names(df_out))
+            print(names(df_output))
 
             # fips and file name stored into the rows
-            df_out[nrow(df_out) + 1,] <- c(fips, zip_file_name, temp[1], temp[2])
+            df_output[nrow(df_output) + 1,] <- c(fips, zip_file_name, temp[1], temp[2])
         }
         
         # if bottom is TRUE, process downloaded zip files
         if(enable_data_proc) {
             # print(tail(df_out))
-            write.csv(df_out,".\\get_list_of_county_from_tiger.csv", row.names = FALSE)
+            write.csv(df_output,".\\get_list_of_county_from_tiger.csv", row.names = FALSE)
         }
         
-        return(df_out)
+        return(df_output)
 
         # get rid of unnecessary first row
         tiger_county_list <- tiger_county_list[-1,] # removing unnecessary row

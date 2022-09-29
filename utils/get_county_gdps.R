@@ -36,10 +36,30 @@ get_county_gdps <- function() {
 
 	# keep only the state, county, fips, area_land, area_water
 	df_output <- beaPayload %>% select(c("GeoFips", "DataValue_2020"))
-	colnames(df_output)  <- c("fips", "gdp_2020_usd2012value")
+	colnames(df_output)  <- c("fips_str", "gdp_2020_usd2012value")
 	# print(head(df_output))
 	# print(names(df_output))
 	# print("test2")
+
+	print("get_county_gdps.R")
+	print(head(df_output))
+	print(tail(df_output))
+	print(names(df_output))
+	print(lapply(df_output,class))
+
+	print(nrow(df_output))
+
+	# print(as.character(df_output['fips_str'])) # character needs to be defined
+
+	for(i in 1:nrow(df_output)) {
+		df_output[i, 'fips'] = as.numeric(as.character(df_output[i, 'fips_str']))
+	}
+
+
+	# df_output['fips'] = as.numeric(as.character(df_output['fips_str']))
+	# df_output['fips'] = as.numeric(as.character(df_output['fips_str']))
+	# df_output['fips'] <- sapply(df_output['fips_str'], as.numeric)
+	print(nrow(df_output))
 
 	# return dataframe
 	# print(df_output)

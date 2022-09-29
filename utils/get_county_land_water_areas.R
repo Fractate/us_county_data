@@ -23,16 +23,18 @@ get_county_land_water_areas <- function() {
 
     df_states <- rbind(state_html %>% html_element("table") %>% html_table(), df_states)
     # df_states <- state_html %>% html_element("table") %>% html_table()
-
-    # print(nrow(df_states))
   }
 
   # keep only the state, county, fips, area_land, area_water
   df_output <- df_states %>% select(c("STATE", "COUNTY", "AREALAND", "AREAWATER"))
   colnames(df_output)  <- c("state", "county", "area_land", "area_water")
 
-  # return dataframe
-  df_output <- df_output[order(df_output$state, df_output$county),]
+  # append fips column to df_output
+  df_output['fips'] <- ((df_output['state'] * 1000) + df_output['county'])
+
+  # order dataframe based on fips
+  df_output <- df_output[order(df_output['fips']),]
+
   # write.csv(df_output,".\\export2.csv", row.names = FALSE)
   return(df_output)
 }
