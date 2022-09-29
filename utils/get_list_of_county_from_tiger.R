@@ -61,8 +61,8 @@ get_county_list <- function(enable_data_proc) {
         # dataframe was considered in containin county id per each county. using out() instead if possible
         # df <- data.frame(first_column, second_column)
         
-        # tiger_county_list <- data.frame("X.fips_count_id.", "X.county_zip_file_name.")
-        # colnames(tiger_county_list)  <- c("fips_count_id", "county_zip_file_name")
+        # tiger_county_list <- data.frame("X.fips_county.", "X.county_zip_file_name.")
+        # colnames(tiger_county_list)  <- c("fips_county", "county_zip_file_name")
 
         # print(tiger_county_list)
         

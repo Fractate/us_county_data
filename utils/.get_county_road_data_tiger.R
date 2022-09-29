@@ -1,3 +1,5 @@
+## Obsolete, logic moved into get_list_of_county_from_tiger.R
+
 # use the cached zip file name to download directly without having to re-scrape for the needed urls
 
 # Function name is 
