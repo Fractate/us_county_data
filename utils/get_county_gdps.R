@@ -8,7 +8,7 @@ source(".\\\\..\\utils\\setup_r_environment.R")
 
 
 # Function initialization
-get_county_land_water_areas <- function() {
+get_county_gdps <- function() {
 
 	# Setup API key
 	beaSets(beaKey = beaKey)
@@ -42,6 +42,6 @@ get_county_land_water_areas <- function() {
 	# print("test2")
 
 	# return dataframe
-	print(df_output)
-	# return(df_output)
+	# print(df_output)
+	return(df_output)
 }

@@ -1,3 +1,7 @@
 https://demographics.coopercenter.org/guide-to-publicly-available-demographic-data
 GUIDE TO PUBLICLY AVAILABLE DEMOGRAPHIC DATA
 
+
+# ## tiger_county_list should now be returned as dataframe by default so the lines below are not needed
+# ## ## lazy way of doing this, instead of retrieving a dataframe i am converting a returned list into a dataframe
+# ## df <- do.call(rbind, lapply(tiger_county_list, as.data.frame))
