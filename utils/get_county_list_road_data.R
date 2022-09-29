@@ -2,8 +2,8 @@
 # https://www2.census.gov/geo/tiger/TIGER2020/ROADS/
 
 # Function name is 
-get_county_road_data <- function(enable_data_proc) {
-    if(!file.exists("get_list_of_county_from_tiger.csv")) {
+get_county_list_road_data <- function(enable_data_proc) {
+    if(!file.exists("get_count_list_road_data.csv")) {
 
         html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
 
@@ -14,18 +14,25 @@ get_county_road_data <- function(enable_data_proc) {
         df_output <- data.frame('fips', 'county_zip_file_name', 'roads_length', 'intersections')
         ## there is no data to be entered in the line below
         # df[ , empty_cols] <- NA
-        print(tail(tiger_county_list))
+        print(head(tiger_county_list, 3))
+        print(tail(tiger_county_list, 3))
 
         # for each row in tiger_county_list, add a new row for df
         # 4 to nrow(tiger_county_list)-1 filters out empty row entries
-        # for(i in 3:6){
-        for(i in 4:nrow(tiger_county_list) - 1){
+        for(i in 3:6){
+        # for(i in 4:nrow(tiger_county_list) - 1){
 
             # returns column of zip file names found in the US Census Tiger data
+            print("tiger_county_list[i,2]")
+            print(tiger_county_list[i,2])
             zip_file_name <- tiger_county_list[i,2]
             fips <- str_sub(zip_file_name, 9, 13)
 
             # Set up new class to handle populating road lengths and number of intersections
+            print("zip_file_name")
+            print(zip_file_name)
+            print("enable_data_proc")
+            print(enable_data_proc)
             temp <- get_county_road_data(zip_file_name, enable_data_proc)
             print("temp")
             print(temp)
@@ -39,7 +46,7 @@ get_county_road_data <- function(enable_data_proc) {
         # if bottom is TRUE, process downloaded zip files
         if(enable_data_proc) {
             # print(tail(df_out))
-            write.csv(df_output,".\\get_list_of_county_from_tiger.csv", row.names = FALSE)
+            write.csv(df_output,".\\get_count_list_road_data.csv", row.names = FALSE)
         }
         
         return(df_output)
@@ -80,7 +87,7 @@ get_county_road_data <- function(enable_data_proc) {
     }
     else {
         # read in cvs file to append additional columns
-        df <- read.csv(".\\get_list_of_county_from_tiger.csv", header=TRUE, stringsAsFactors=FALSE)
+        df <- read.csv(".\\get_count_list_road_data.csv", header=TRUE, stringsAsFactors=FALSE)
 
         return(df)
     }
@@ -125,8 +132,16 @@ get_county_road_data <- function(zip_file_name, enable_data_proc) {
         road_boundary_HARV <- st_read(zip_file_name_converted_to_shp)
 
         # Retrieve geometry attributes from road_boundary_HARV for processing, crs sets the length to be base meters in north america
-        sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
+        ## "+proj=longlat +datum=NAD83 +no_defs"
+        ## https://github.com/walkerke/tigris/blob/master/R/helpers.R
+        # https://www2.census.gov/geo/pdfs/reference/mtfccs2022.pdf
+        sd = st_sfc(geometry=road_boundary_HARV$geometry, crs="+proj=longlat +datum=NAD83 +no_defs", MFTCC!=)
+        # sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
 
+        # http://walker-data.com/umich-workshop/spatial-analysis/slides/#29
+        ## fl_projected <- st_transform(fl_counties, crs = 3086)
+
+        
         # Verify the calculation of lengths and intersections within the shapefile
         st_area(sd) # this returns only 0 because shapefile only includes the vectors of the roads
         attributes(sd)
