@@ -13,6 +13,25 @@ library(sf)
 # 
 aoi_boundary_HARV <- st_read("tl_2020_36061_roads.shp")
 
+class(aoi_boundary_HARV)
+
+head(aoi_boundary_HARV$MTFCC)
+
+# set directory to where shapefile is located as setwd
+
+# Retrieve geometry attributes from road_boundary_HARV for processing, crs sets the length to be base meters in north america
+sd = st_sfc(geometry=aoi_boundary_HARV$geometry, crs=4326)
+
+
+# MTFCC definitions for road code tiger shapefile
+# MAF/TIGER Feature Class Code (MTFCC) Definitions
+# S1710 Walkway/Pedestrian Trail
+# https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2019/TGRSHP2019_TechDoc.pdf
+
+sd.
+
+
+
 
 # st_geometry_type(aoi_boundary_HARV)
 #
