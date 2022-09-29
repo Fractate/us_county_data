@@ -1,7 +1,44 @@
 # use the cached zip file name to download directly without having to re-scrape for the needed urls
 
 # Function name is 
-get_county_road_data <- function(zip_file_name, roads_length, intersections) {
+get_county_road_length_intersects <- function(df_fips_id) {
+    
+    if(!file.exists("get_county_road_data_tiger.csv")) {
+
+        # add a column to df_lj to house total length and intersections
+        # df_fips[ , 'roads_length', 'intersections'] <- NA
+        empty_cols <- c('roads_length', 'intersections')
+        df_fips[ , empty_cols] <- NA
+            
+        # # for loop will be needed for road data retrieval per each county
+        for(i in 2:nrow(df_fips)) {
+        # for(i in 2:3) {
+            # print(df_lj[i]['X.county_zip_file_name.'])
+            # print(df_lj[i][value])
+            # print(i)
+            # print(df_lj[i,2])
+
+            # print(class(df_lj[i,]))
+            # Set up new class to handle populating road lengths and number of intersections
+            temp <- get_county_road_data(df_lj[i,2], df_lj[i,5], df_lj[i,6])
+            df_fips[i,5] <- temp[1]
+            df_fips[i,6] <- temp[2]
+        }
+
+        write.csv(df_lj,".\\get_county_road_data_tiger.csv", row.names = FALSE)
+    }
+    else {
+        df <- read.csv(".\\get_county_road_data_tiger.csv", header=TRUE, stringsAsFactors=FALSE)
+        return(df)
+    }
+}
+
+
+
+
+
+# Function name is 
+get_county_road_data_1 <- function(zip_file_name) {
     
     # Set naming string variables
     shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
