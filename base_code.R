@@ -69,7 +69,7 @@ if(!file.exists("export.csv")) {
     df_lj <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
 }
 
-# version 1 Data Retrieval Complete
+# Version 1 Data Retrieval Complete
 print(head(df_lj))
 print(names(df_lj))
 
