@@ -69,7 +69,6 @@ get_county_road_data_1 <- function(zip_file_name) {
 
     # filtering out items that are national and state highways
     ## https://www.statology.org/dplyr-filter-not-in/
-    
     # MFTCC Codes are found in the link below
     ## https://www2.census.gov/geo/pdfs/reference/mtfccs2022.pdf
     road_boundary_HARV %>% filter(!MTFCC %in% c('S1100', 'S1200'))

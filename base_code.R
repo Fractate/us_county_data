@@ -23,7 +23,7 @@ if(!file.exists("export.csv")) {
 
     # total road intersections - done
     # total road length - done
-    df_county_road_data <- get_county_road_data(enable_data_proc=TRUE)
+    df_county_road_data <- get_county_list_road_data(enable_data_proc=TRUE)
     # get_county_list(enable_data_proc=FALSE)
     # processes data processing (downloaded files are automatically overlooked)
     print(head(df_county_road_data))
@@ -69,6 +69,14 @@ if(!file.exists("export.csv")) {
     df_lj <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
 }
 
+# fips # county_zip_file_name # roads_length # intersections
+ # fips # countyname # population
+ # state # county # area_land # area_water # fips
+ # fips # gdp_2020_usd2012value
+ # fips # state_fips # county_fips # poverty_percentage # median_household_income
+
+# grah rad and intersectin reatins
+
 # Version 1 Data Retrieval Complete
 print(head(df_lj))
 print(names(df_lj))
@@ -79,6 +87,9 @@ print(names(df_lj))
 
 # ## statistical analysis
 # # is there a way to put a number value to the road length, intersects, population count, total area and boil it down to a number
+
+# road per humans and area 
+
 # # are there ways to see if the numbers are related to counties near by. are there patterns
 # # are there evidence of counties other values (such as economic) carrying over onto other counties as well (less of a priority)
 

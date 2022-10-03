@@ -19,8 +19,8 @@ get_county_list_road_data <- function(enable_data_proc) {
 
         # for each row in tiger_county_list, add a new row for df
         # 4 to nrow(tiger_county_list)-1 filters out empty row entries
-        for(i in 3:6){
-        # for(i in 4:nrow(tiger_county_list) - 1){
+        # for(i in 3:6){
+        for(i in 4:nrow(tiger_county_list) - 1){
 
             # returns column of zip file names found in the US Census Tiger data
             print("tiger_county_list[i,2]")
@@ -43,16 +43,16 @@ get_county_list_road_data <- function(enable_data_proc) {
             df_output[nrow(df_output) + 1,] <- c(fips, zip_file_name, temp[1], temp[2])
         }
         
+        # get rid of unnecessary first row
+        df_output <- df_output[-1,] # removing unnecessary row
+
         # if bottom is TRUE, process downloaded zip files
         if(enable_data_proc) {
             # print(tail(df_out))
             write.csv(df_output,".\\get_count_list_road_data.csv", row.names = FALSE)
         }
-        
+  
         return(df_output)
-
-        # get rid of unnecessary first row
-        tiger_county_list <- tiger_county_list[-1,] # removing unnecessary row
 
         
         # for(i in 3:3){
@@ -131,19 +131,21 @@ get_county_road_data <- function(zip_file_name, enable_data_proc) {
         # road_boundary_HARV <- st_read(zip_file_name_converted_to_shp, quiet = TRUE, stringsAsFactors = FALSE)
         road_boundary_HARV <- st_read(zip_file_name_converted_to_shp)
 
-        # Retrieve geometry attributes from road_boundary_HARV for processing, crs sets the length to be base meters in north america
-        ## "+proj=longlat +datum=NAD83 +no_defs"
-        ## https://github.com/walkerke/tigris/blob/master/R/helpers.R
-        # https://www2.census.gov/geo/pdfs/reference/mtfccs2022.pdf
-        sd = st_sfc(geometry=road_boundary_HARV$geometry, crs="+proj=longlat +datum=NAD83 +no_defs", MFTCC!=)
+        # filtering out items that are national and state highways
+        ## https://www.statology.org/dplyr-filter-not-in/
+        # MFTCC Codes are found in the link below
+        ## https://www2.census.gov/geo/pdfs/reference/mtfccs2022.pdf
+        road_boundary_HARV = road_boundary_HARV %>% filter(!MTFCC %in% c('S1100', 'S1200'))
+        sd = st_sfc(geometry=road_boundary_HARV$geometry, crs="+proj=longlat +datum=NAD83 +no_defs")
+
         # sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)
 
         # http://walker-data.com/umich-workshop/spatial-analysis/slides/#29
         ## fl_projected <- st_transform(fl_counties, crs = 3086)
 
         
-        # Verify the calculation of lengths and intersections within the shapefile
-        st_area(sd) # this returns only 0 because shapefile only includes the vectors of the roads
+        # # Verify the calculation of lengths and intersections within the shapefile
+        # st_area(sd) # this returns only 0 because shapefile only includes the vectors of the roads
         attributes(sd)
         # st_intersects(sd) # shows number of intersects
 
