@@ -21,10 +21,12 @@ library(tidyverse) # allows the usage of left_join
 # (aka default as set in setup_r_environment.R) folder
 if(!file.exists("export.csv")) {
 
+    # # Following needs to run to initialize the shapefiles
+    # get_county_list_road_data(enable_data_proc=FALSE)
+    
     # total road intersections - done
     # total road length - done
     df_county_road_data <- get_county_list_road_data(enable_data_proc=TRUE)
-    # get_county_list(enable_data_proc=FALSE)
     # processes data processing (downloaded files are automatically overlooked)
     print(head(df_county_road_data))
     print(tail(df_county_road_data))
@@ -55,9 +57,11 @@ if(!file.exists("export.csv")) {
     print(tail(df_county_poverty_and_med_income))
     print(names(df_county_poverty_and_med_income)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
 
-    ### Joins
-    # Filter for the counties that match between the list of county population and county tiger files and populate population column
-    # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
+    # ### Joins
+    # # Filter for the counties that match between the list of county population and county tiger files and populate population column
+    # # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
+    # df_lj <- left_join(df_county_road_data, subset(df_county_pop, fips<60000), by = c("fips"="fips"))
+
     df_lj <- left_join(df_county_road_data, df_county_pop, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_land_water_areas, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_gdps, by = c("fips"="fips"))
