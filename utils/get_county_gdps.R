@@ -9,6 +9,7 @@ source(".\\\\..\\utils\\setup_r_environment.R")
 
 # Function initialization
 get_county_gdps <- function() {
+	if(!file.exists("get_county_gdps.csv")) {
 
 	# Setup API key
 	beaSets(beaKey = beaKey)
@@ -62,6 +63,13 @@ get_county_gdps <- function() {
 	print(nrow(df_output))
 
 	# return dataframe
-	# print(df_output)
+	write.csv(df_output,".\\get_county_gdps.csv", row.names = FALSE)
+
 	return(df_output)
+	} else {
+		# read in cvs file to append additional columns
+		df <- read.csv(".\\get_county_gdps.csv", header=TRUE, stringsAsFactors=FALSE)
+
+		return(df)
+	}
 }

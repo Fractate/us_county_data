@@ -20,7 +20,8 @@ get_county_list_road_data <- function(enable_data_proc) {
         # for each row in tiger_county_list, add a new row for df
         # 4 to nrow(tiger_county_list)-1 filters out empty row entries
         # for(i in 3:6){
-        for(i in 4:nrow(tiger_county_list) - 1){
+        # subtracting 89 more to account only 56000 and before aka 50 states of usa
+        for(i in 3:(nrow(tiger_county_list) - 1 - 89)){
 
             # returns column of zip file names found in the US Census Tiger data
             print("tiger_county_list[i,2]")
@@ -49,6 +50,7 @@ get_county_list_road_data <- function(enable_data_proc) {
         # if bottom is TRUE, process downloaded zip files
         if(enable_data_proc) {
             # print(tail(df_out))
+            colnames(df_output)  <- c("fips', 'county_zip_file_name', 'roads_length', 'intersections")
             write.csv(df_output,".\\get_count_list_road_data.csv", row.names = FALSE)
         }
   
@@ -135,7 +137,10 @@ get_county_road_data <- function(zip_file_name, enable_data_proc) {
         ## https://www.statology.org/dplyr-filter-not-in/
         # MFTCC Codes are found in the link below
         ## https://www2.census.gov/geo/pdfs/reference/mtfccs2022.pdf
-        road_boundary_HARV = road_boundary_HARV %>% filter(!MTFCC %in% c('S1100', 'S1200'))
+        # road_boundary_HARV = road_boundary_HARV %>% filter(!MTFCC %in% c('S1100', 'S1200'))
+        #### instead of filtering out national and state highways, filtering only for local and footpath roads
+        road_boundary_HARV = road_boundary_HARV %>% filter(MTFCC %in% c('S1400', 'S1710'))
+    
         sd = st_sfc(geometry=road_boundary_HARV$geometry, crs="+proj=longlat +datum=NAD83 +no_defs")
 
         # sd = st_sfc(geometry=road_boundary_HARV$geometry, crs=4326)

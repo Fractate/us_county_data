@@ -4,6 +4,7 @@ library(readxl)
 
 # Function initialization
 get_county_poverty_and_med_income <- function() {
+    if(!file.exists("get_county_poverty_and_med_income.csv")) {
 
     # download excel file to temp file to process and discard
     temp.file <- paste(tempfile(),".xls",sep = "")
@@ -28,5 +29,14 @@ get_county_poverty_and_med_income <- function() {
     # # df_output['fips'] <- sapply(paste(df_output['state_fips'],df_output['county_fips']), as.numeric)
     # # df_output['fips'] <- ((strtoi(df_output['state_fips']) * 1000) + strtoi(df_output['county_fips']))
 
+    write.csv(df_output,".\\get_county_poverty_and_med_income.csv", row.names = FALSE)
+
+
     return(df_output)
+    } else {
+        # read in cvs file to append additional columns
+        df <- read.csv(".\\get_county_poverty_and_med_income.csv", header=TRUE, stringsAsFactors=FALSE)
+
+        return(df)
+    }
 }

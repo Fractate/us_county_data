@@ -5,6 +5,7 @@ library("dplyr") # loading the required library for search() df
 
 # Function initialization
 get_county_land_water_areas <- function() {
+  if(!file.exists("get_county_land_water_areas.csv")) {
 
   root_county_areas_2020_directory <- "https://tigerweb.geo.census.gov/tigerwebmain/"
   county_areas_2020_link <- "https://tigerweb.geo.census.gov/tigerwebmain/TIGERweb_counties_current.html"
@@ -36,5 +37,15 @@ get_county_land_water_areas <- function() {
   df_output <- df_output[order(df_output['fips']),]
 
   # write.csv(df_output,".\\export2.csv", row.names = FALSE)
+
+  write.csv(df_output,".\\get_county_land_water_areas.csv", row.names = FALSE)
+
+
   return(df_output)
+  } else {
+      # read in cvs file to append additional columns
+      df <- read.csv(".\\get_county_land_water_areas.csv", header=TRUE, stringsAsFactors=FALSE)
+
+      return(df)
+  }
 }
