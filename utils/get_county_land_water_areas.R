@@ -28,7 +28,7 @@ get_county_land_water_areas <- function() {
 
   # keep only the state, county, fips, area_land, area_water
   df_output <- df_states %>% select(c("STATE", "COUNTY", "AREALAND", "AREAWATER"))
-  colnames(df_output)  <- c("state", "county", "area_land", "area_water")
+  colnames(df_output)  <- c("state", "county", "area_land_sqm", "area_water_sqm")
 
   # append fips column to df_output
   df_output['fips'] <- ((df_output['state'] * 1000) + df_output['county'])

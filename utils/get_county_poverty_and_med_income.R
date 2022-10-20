@@ -19,7 +19,7 @@ get_county_poverty_and_med_income <- function() {
     colnames(df_output)  <- c("state_fips", "county_fips", "poverty_percentage", "median_household_income")
    
 	for(i in 1:nrow(df_output)) {
-		df_output[i, 'fips'] <- ((strtoi(df_output[i, 'state_fips']) * 1000) + strtoi(df_output[i, 'county_fips']))
+		df_output[i, 'fips'] <- ((strtoi(df_output[i, 'state_fips']) * 1000) + strtoi(df_output[i, 'county_fips'], base=10L))
 	}
 
     # # append fips column to df_output

@@ -1,3 +1,5 @@
+# Run setup_r_environment.R to prep first
+
 # import util codes
 source(".\\\\..\\utils\\setup_r_environment.R")
 env_setup()
@@ -6,6 +8,7 @@ source(".\\\\..\\utils\\get_county_gdps.R")
 source(".\\\\..\\utils\\get_county_poverty_and_med_income.R")
 source(".\\\\..\\utils\\get_county_land_water_areas.R")
 source(".\\\\..\\utils\\get_county_fips_population.R")
+source(".\\\\..\\utils\\get_county_pollution.R")
 # source(".\\\\..\\utils\\get_county_road_data_tiger.R")
 
 # libraries
@@ -57,15 +60,33 @@ if(!file.exists("export.csv")) {
     print(tail(df_county_poverty_and_med_income))
     print(names(df_county_poverty_and_med_income)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
 
+    # retrieve pollution information
+    # median income & poverty per county - done
+    df_county_pollution <- get_county_pollution()
+    print(head(df_county_pollution))
+    print(tail(df_county_pollution))
+    print(names(df_county_pollution)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
+
     # ### Joins
     # # Filter for the counties that match between the list of county population and county tiger files and populate population column
     # # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
     # df_lj <- left_join(df_county_road_data, subset(df_county_pop, fips<60000), by = c("fips"="fips"))
-
     df_lj <- left_join(df_county_road_data, df_county_pop, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_land_water_areas, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_gdps, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_poverty_and_med_income, by = c("fips"="fips"))
+    df_lj <- left_join(df_lj, df_county_pollution, by = c("fips"="fips"))
+
+    ### CONVERT METERES TO KILOMETERS
+    df_lj['area_land_sqkm'] <- df_lj['area_land_sqm'] / 1000000
+    df_lj['roads_length_km'] <- df_lj['roads_length_m'] / 1000
+
+    ### CALCULATE THE ROAD DENSITY AND SUCH HERE
+    df_lj['intersects_per_road_length'] <- df_lj['intersections'] /  df_lj['roads_length_km']
+    df_lj['road_length_per_intersect'] <- df_lj['roads_length_km'] /  df_lj['intersections']
+    df_lj['population_density'] <- df_lj['population'] /  df_lj['area_land_sqkm']
+    df_lj['intersects_per_population_density'] <- df_lj['intersects_per_road_length'] * df_lj['population_density']
+
 
     write.csv(df_lj,".\\export.csv", row.names = FALSE)
 } else {
@@ -73,21 +94,10 @@ if(!file.exists("export.csv")) {
     df_lj <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
 }
 
-# fips # county_zip_file_name # roads_length # intersections
- # fips # countyname # population
- # state # county # area_land # area_water # fips
- # fips # gdp_2020_usd2012value
- # fips # state_fips # county_fips # poverty_percentage # median_household_income
-
 # grah rad and intersectin reatins
-
 # Version 1 Data Retrieval Complete
 print(head(df_lj))
 print(names(df_lj))
-
-
-
-
 
 # ## statistical analysis
 # # is there a way to put a number value to the road length, intersects, population count, total area and boil it down to a number
@@ -108,10 +118,6 @@ print(names(df_lj))
 
 
 # ## The census data align at the county level by using County FIPS Codes. This is the State Code + County Code for 5 digit number
-
-
-
-
 
 
 
