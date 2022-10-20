@@ -38,6 +38,17 @@ get_county_land_water_areas <- function() {
 
   # write.csv(df_output,".\\export2.csv", row.names = FALSE)
 
+
+  ### Populating Connecticut information manually because it's not retrieved from website
+  df_output["area_land_sqm"][df["fips"] == 9001] <- 1618672300
+  df_output["area_land_sqm"][df["fips"] == 9003] <- 1903468700
+  df_output["area_land_sqm"][df["fips"] == 9005] <- 2384146800
+  df_output["area_land_sqm"][df["fips"] == 9007] <- 956487000
+  df_output["area_land_sqm"][df["fips"] == 9009] <- 1565162900
+  df_output["area_land_sqm"][df["fips"] == 9011] <- 1722531300
+  df_output["area_land_sqm"][df["fips"] == 9013] <- 1062806500
+  df_output["area_land_sqm"][df["fips"] == 9015] <- 1328488700
+
   write.csv(df_output,".\\get_county_land_water_areas.csv", row.names = FALSE)
 
 
