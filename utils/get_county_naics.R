@@ -2,7 +2,7 @@
 library(tidyverse) # allows the usage of left_join
 
 # Function name is 
-get_county_population <- function() {
+get_county_naics <- function() {
 
     if(!file.exists("get_county_naics.csv")){
 
@@ -18,7 +18,7 @@ get_county_population <- function() {
             unlink(temp)
         }
         
-        setwd("C://Users/cjong/Projects/r_projects/us_county_human_road_density/unzipped_shp_and_shx_shape_files/")
+        # setwd("C://Users/cjong/Projects/r_projects/us_county_human_road_density/unzipped_shp_and_shx_shape_files/")
 
         # data retrieved from "Complete County File" at https://www.census.gov/data/datasets/2020/econ/cbp/2020-cbp.html
         df <- read.csv("..\\import_files\\cbp20co.txt", header=TRUE, stringsAsFactors=FALSE)
