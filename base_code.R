@@ -10,6 +10,7 @@ source(".\\\\..\\utils\\get_county_land_water_areas.R")
 source(".\\\\..\\utils\\get_county_fips_population.R")
 source(".\\\\..\\utils\\get_county_pollution.R")
 source(".\\\\..\\utils\\get_county_naics.R")
+source(".\\\\..\\utils\\get_county_climate.R")
 # source(".\\\\..\\utils\\get_county_road_data_tiger.R")
 
 # libraries
@@ -77,6 +78,12 @@ if(enable_clean_run || !file.exists("export.csv")) {
     print(tail(df_county_naics))
     print(names(df_county_naics)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
 
+    # retrieve climate information
+    df_county_climate <- get_county_climate()
+    print(head(df_county_climate))
+    print(tail(df_county_climate))
+    print(names(df_county_climate)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
+
     # ### Joins
     # # Filter for the counties that match between the list of county population and county tiger files and populate population column
     # # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
@@ -87,6 +94,7 @@ if(enable_clean_run || !file.exists("export.csv")) {
     df_lj <- left_join(df_lj, df_county_poverty_and_med_income, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_pollution, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_naics, by = c("fips"="fips"))
+    df_lj <- left_join(df_lj, df_county_climate, by = c("fips"="fips"))
 
     ### CONVERT METERES TO KILOMETERS
     df_lj['area_land_sqkm'] <- df_lj['area_land_sqm'] / 1000000

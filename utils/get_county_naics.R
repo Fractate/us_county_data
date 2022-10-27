@@ -70,7 +70,7 @@ get_county_naics <- function() {
         
         write.csv(df_fips,".\\get_county_naics.csv", row.names = FALSE)
 
-        return(df)
+        return(df_fips)
     }
     else {
         df <- read.csv(".\\get_county_naics.csv", header=TRUE, stringsAsFactors=FALSE)
