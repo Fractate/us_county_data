@@ -477,7 +477,7 @@ get_county_vehicles <- function() {
       ## S2502_C02_026	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 1990 to 1999
       ## S2502_C02_027	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 1989 or earlier
       # S2502	DEMOGRAPHIC CHARACTERISTICS FOR OCCUPIED HOUSING UNITS
-      S2502_occupancy_characteristics_df <- get_acs(geography = "county", variables = c(S2502_households_occupied-total                        = "S2502_C02_001",
+      S2502_occupancy_characteristics_df <- get_acs(geography = "county", variables = c(S2502_households_occupied_total                        = "S2502_C02_001",
                                                                                         S2502_householder_age_under_35                         = "S2502_C02_011",
                                                                                         S2502_householder_age_35_to_44                         = "S2502_C02_012",
                                                                                         S2502_householder_age_45_to_54                         = "S2502_C02_013",
