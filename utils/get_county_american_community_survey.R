@@ -892,8 +892,8 @@ get_county_american_community_survey <- function() {
       # B09001_population_under_18_df
       # B11012_households_by_type_df
       # B11016_households_by_size_df
-      # B12007_median_age_first_marriage_by_sex_df
-      # B12503_divorces_last_year_by_sex_df
+      # # B12007_median_age_first_marriage_by_sex_df
+      # # B12503_divorces_last_year_by_sex_df
       # B13002_women_15_to_50_df
       
       df_lj <- left_join(S2302_family_employment_12_months_df, S2303_population_work_status_12_months_df, by = c("fips"="fips"))
@@ -915,8 +915,8 @@ get_county_american_community_survey <- function() {
       df_lj <- left_join(df_lj, B09001_population_under_18_df, by = c("fips"="fips"))
       df_lj <- left_join(df_lj, B11012_households_by_type_df, by = c("fips"="fips"))
       df_lj <- left_join(df_lj, B11016_households_by_size_df, by = c("fips"="fips"))
-      df_lj <- left_join(df_lj, B12007_median_age_first_marriage_by_sex_df, by = c("fips"="fips"))
-      df_lj <- left_join(df_lj, B12503_divorces_last_year_by_sex_df, by = c("fips"="fips"))
+      # df_lj <- left_join(df_lj, B12007_median_age_first_marriage_by_sex_df, by = c("fips"="fips"))
+      # df_lj <- left_join(df_lj, B12503_divorces_last_year_by_sex_df, by = c("fips"="fips"))
       df_lj <- left_join(df_lj, B13002_women_15_to_50_df, by = c("fips"="fips"))
     
       # cropping dataframe
