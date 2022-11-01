@@ -427,15 +427,17 @@ get_county_american_community_survey <- function() {
       # S1702	POVERTY STATUS IN THE PAST 12 MONTHS OF FAMILIES
       S1702_family_poverty_12_months_df <- get_acs(geography = "county", variables = c(S1702_family_poverty_total       = "S1702_C02_001",
                                                                                        S1702_family_poverty_home_renter = "S1702_C02_042",
-                                                                                       S1702_family_poverty_home_owner  = "S1702_C02_041",
-                                                                                       S1702_family_poverty_50_below    = "S1702_C02_043",
-                                                                                       S1702_family_poverty_125_below   = "S1702_C02_044",
-                                                                                       S1702_family_poverty_150_below   = "S1702_C02_045",
-                                                                                       S1702_family_poverty_185_below   = "S1702_C02_046",
-                                                                                       S1702_family_poverty_200_below   = "S1702_C02_047",
-                                                                                       S1702_family_poverty_300_below   = "S1702_C02_048",
-                                                                                       S1702_family_poverty_400_below   = "S1702_C02_049",
-                                                                                       S1702_family_poverty_500_below   = "S1702_C02_050"),
+                                                                                       S1702_family_poverty_home_owner  = "S1702_C02_041"
+                                                                                       # ,
+                                                                                       # S1702_family_poverty_50_below    = "S1702_C02_043",
+                                                                                       # S1702_family_poverty_125_below   = "S1702_C02_044",
+                                                                                       # S1702_family_poverty_150_below   = "S1702_C02_045",
+                                                                                       # S1702_family_poverty_185_below   = "S1702_C02_046",
+                                                                                       # S1702_family_poverty_200_below   = "S1702_C02_047",
+                                                                                       # S1702_family_poverty_300_below   = "S1702_C02_048",
+                                                                                       # S1702_family_poverty_400_below   = "S1702_C02_049",
+                                                                                       # S1702_family_poverty_500_below   = "S1702_C02_050"
+                                                                                       ),
                                           year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
         spread(variable, estimate) %>% 
