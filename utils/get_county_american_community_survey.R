@@ -184,8 +184,9 @@
 library(tidycensus)
 library(tidyverse)
 
+
 # Function name is 
-get_county_vehicles <- function() {
+get_county_american_community_survey <- function() {
   
   # https://walker-data.com/tidycensus/articles/basic-usage.html
   # https://data.census.gov/cedsci/table?q=B07001%3A%20GEOGRAPHICAL%20MOBILITY%20IN%20THE%20PAST%20YEAR%20BY%20AGE%20FOR%20CURRENT%20RESIDENCE%20IN%20THE%20UNITED%20STATES&g=0100000US&y=2021&tid=ACSDT1Y2021.B07001
@@ -209,7 +210,7 @@ get_county_vehicles <- function() {
   # initial variables pulled by 2020_DataProductList_5Year.xlsx
   # secondary variables pulled by ACS2020_Table_Shells.xlsx
   
-    if(!file.exists("get_county_vehicles.csv")){
+    if(!file.exists("get_county_american_community_survey.csv")){
       
       ###############################################################################################################
       ##### ACS Data I might actually use
@@ -869,16 +870,61 @@ get_county_vehicles <- function() {
       ############################################################################################################################################
       
       
-        # cropping dataframe
-        df <- df[,c("GEOID", "NAM", "valu")]
-        colnames(df)  <- c("fips", "countynam", "population")
-        
-        write.csv(df,".\\get_county_vehicles.csv", row.names = FALSE)
+      # S2302_family_employment_12_months_df
+      # S2303_population_work_status_12_months_df
+      # S1901_income_past_12_months_df
+      # S1101_household_and_families_df
+      # S1401_population_school_enrollment_df
+      # S1701_population_poverty_12_months_df
+      # S1702_family_poverty_12_months_df
+      # S1301_fertility_df
+      # S1501_education_attainment_df
+      # S2501_occupancy_characteristics_df
+      # S2502_occupancy_characteristics_df
+      # S2503_household_count_per_income_bracket_df
+      # S2503_housing_cost_percentage_per_incomes_df
+      # S2801_technology_access_df
+      # DP04_vehicle_and_housing_characteristics_df
+      # DP05_population_age_groups_df
+      # B08121_median_income_per_transportation_df
+      # B09001_population_under_18_df
+      # B11012_households_by_type_df
+      # B11016_households_by_size_df
+      # B12007_median_age_first_marriage_by_sex_df
+      # B12503_divorces_last_year_by_sex_df
+      # B13002_women_15_to_50_df
+      
+      df_lj <- left_join(S2302_family_employment_12_months_df, S2303_population_work_status_12_months_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1901_income_past_12_months_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1101_household_and_families_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1401_population_school_enrollment_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1701_population_poverty_12_months_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1702_family_poverty_12_months_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1301_fertility_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S1501_education_attainment_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S2501_occupancy_characteristics_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S2502_occupancy_characteristics_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S2503_household_count_per_income_bracket_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S2503_housing_cost_percentage_per_incomes_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, S2801_technology_access_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, DP04_vehicle_and_housing_characteristics_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, DP05_population_age_groups_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B08121_median_income_per_transportation_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B09001_population_under_18_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B11012_households_by_type_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B11016_households_by_size_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B12007_median_age_first_marriage_by_sex_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B12503_divorces_last_year_by_sex_df, by = c("fips"="fips"))
+      df_lj <- left_join(df_lj, B13002_women_15_to_50_df, by = c("fips"="fips"))
+    
+      # cropping dataframe
+      
+      write.csv(df_lj,".\\get_county_american_community_survey.csv", row.names = FALSE)
 
-        return(df)
+      return(df_lj)
     }
     else {
-        df <- read.csv(".\\get_county_vehicles.csv", header=TRUE, stringsAsFactors=FALSE)
-        return(df)
+      df <- read.csv(".\\get_county_american_community_survey.csv", header=TRUE, stringsAsFactors=FALSE)
+      return(df)
     }
 }
