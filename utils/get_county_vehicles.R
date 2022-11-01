@@ -220,8 +220,8 @@ get_county_vehicles <- function() {
       ## S2302_C01_015	Estimate!!Total!!WORK STATUS CHARACTERISTICS!!Families!!No workers in the past 12 months
       ## S2302_C02_015	Estimate!!Percent!!WORK STATUS CHARACTERISTICS!!Families!!No workers in the past 12 months
       # S2302	EMPLOYMENT CHARACTERISTICS OF FAMILIES
-      family_employment_12_months_df <- get_acs(geography = "county", variables = c(S2302_families_no_worker           = "S2302_C01_015",
-                                                                                    S2302_families_no_worker_percent   = "S2302_C02_015"),
+      S2302_family_employment_12_months_df <- get_acs(geography = "county", variables = c(S2302_families_no_worker           = "S2302_C01_015",
+                                                                                          S2302_families_no_worker_percent   = "S2302_C02_015"),
                                                 year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
         spread(variable, estimate) %>% 
@@ -236,9 +236,9 @@ get_county_vehicles <- function() {
       ## S2303_C01_008	Estimate!!Total!!Population 16 to 64 years!!WEEKS WORKED!!Did not work
       ## S2303_C02_008	Estimate!!Percent!!Population 16 to 64 years!!WEEKS WORKED!!Did not work
       # S2303	WORK STATUS IN THE PAST 12 MONTHS
-      population_work_status_12_months_df <- get_acs(geography = "county", variables = c(S2303_population_16_to_64_total           = "S2303_C01_001",
-                                                                                         S2303_population_16_to_64_no_work         = "S2303_C01_008",
-                                                                                         S2303_population_16_to_64_no_work_percent = "S2303_C02_008"),
+      S2303_population_work_status_12_months_df <- get_acs(geography = "county", variables = c(S2303_population_16_to_64_total           = "S2303_C01_001",
+                                                                                               S2303_population_16_to_64_no_work         = "S2303_C01_008",
+                                                                                               S2303_population_16_to_64_no_work_percent = "S2303_C02_008"),
                                                      year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
         spread(variable, estimate) %>% 
@@ -253,9 +253,9 @@ get_county_vehicles <- function() {
       ## S1901_C01_013	Estimate!!Households!!Mean income (dollars)
       ## S1901_C02_012	Estimate!!Families!!Median income (dollars)
       # S1901	INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)
-      income_past_12_months_df <- get_acs(geography = "county", variables = c(S1901_households_total         = "S1901_C01_001",
-                                                                              S1901_households_mean_income   = "S1901_C01_013",
-                                                                              S1901_households_median_income = "S1901_C02_012"), year = 2020,) %>%
+      S1901_income_past_12_months_df <- get_acs(geography = "county", variables = c(S1901_households_total         = "S1901_C01_001",
+                                                                                    S1901_households_mean_income   = "S1901_C01_013",
+                                                                                    S1901_households_median_income = "S1901_C02_012"), year = 2020,) %>%
           select(GEOID, variable, estimate) %>% 
           spread(variable, estimate) %>% 
           rename(fips = "GEOID")
