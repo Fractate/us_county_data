@@ -1,4 +1,44 @@
 
+# ############################################################################################################################################
+# FOLLOWING DATA DOES NOT RETRIEVE COUNTY LEVLE INFORMATION
+# ############################################################################################################################################
+# ### https://api.census.gov/data/2019/acs/acs1/groups/B12007.html
+# ## B12007_001	Estimate!!Median age at first marriage --!!Male
+# ## B12007_002	Estimate!!Median age at first marriage --!!Female
+# # B12007	MEDIAN AGE AT FIRST MARRIAGE
+# B12007_median_age_first_marriage_by_sex_df <- get_acs(geography = "county", variables = c(B12007_male_median_age_first_marriage   = "B12007_001",
+#                                                                                           B12007_female_median_age_first_marriage = "B12007_002"),
+#                 year = 2020,) %>%
+#   select(GEOID, variable, estimate) %>% 
+#   spread(variable, estimate) %>% 
+#   rename(fips = "GEOID")
+# ############################################################################################################################################
+
+
+# ############################################################################################################################################
+# THE FOLLOWING CODE DOES NOT RETRIEVE COUNTY LEVEL DATA
+# ############################################################################################################################################
+# ### https://api.census.gov/data/2019/acs/acs1/groups/B12503.html
+# ## B12503_002	Estimate!!Total:!!Male:
+# ## B12503_003	Estimate!!Total:!!Male:!!Never married
+# ## B12503_004	Estimate!!Total:!!Male:!!Ever married:
+# ## B12503_007	Estimate!!Total:!!Female:
+# ## B12503_008	Estimate!!Total:!!Female:!!Never married
+# ## B12503_009	Estimate!!Total:!!Female:!!Ever married:
+# # B12503	DIVORCES IN THE LAST YEAR BY SEX BY MARITAL STATUS FOR THE POPULATION 15 YEARS AND OVER
+# B12503_divorces_last_year_by_sex_df <- get_acs(geography = "county", variables = c(B12503_male_total           = "B12503_002",
+#                                                                                    B12503_male_never_married   = "B12503_003",
+#                                                                                    B12503_male_ever_married    = "B12503_004",
+#                                                                                    B12503_female_total         = "B12503_007",
+#                                                                                    B12503_female_never_married = "B12503_008",
+#                                                                                    B12503_female_ever_married  = "B12503_009"),
+#                 year = 2020,) %>%
+#   select(GEOID, variable, estimate) %>% 
+#   spread(variable, estimate) %>% 
+#   rename(fips = "GEOID")
+# ############################################################################################################################################
+
+
 ###############################################################################################################
     ### Interesting variables but not used in research due to too much specific details that may not directly correspond
 
@@ -813,45 +853,7 @@ get_county_american_community_survey <- function() {
       
       ############################################################################################################################################
       
-      
-      ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B12007.html
-      ## B12007_001	Estimate!!Median age at first marriage --!!Male
-      ## B12007_002	Estimate!!Median age at first marriage --!!Female
-      # B12007	MEDIAN AGE AT FIRST MARRIAGE
-      B12007_median_age_first_marriage_by_sex_df <- get_acs(geography = "county", variables = c(B12007_male_median_age_first_marriage   = "B12007_001",
-                                                                                                B12007_female_median_age_first_marriage = "B12007_002"),
-                      year = 2020,) %>%
-        select(GEOID, variable, estimate) %>% 
-        spread(variable, estimate) %>% 
-        rename(fips = "GEOID")
-      
-      ############################################################################################################################################
-      
-      
-      ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B12503.html
-      ## B12503_002	Estimate!!Total:!!Male:
-      ## B12503_003	Estimate!!Total:!!Male:!!Never married
-      ## B12503_004	Estimate!!Total:!!Male:!!Ever married:
-      ## B12503_007	Estimate!!Total:!!Female:
-      ## B12503_008	Estimate!!Total:!!Female:!!Never married
-      ## B12503_009	Estimate!!Total:!!Female:!!Ever married:
-      # B12503	DIVORCES IN THE LAST YEAR BY SEX BY MARITAL STATUS FOR THE POPULATION 15 YEARS AND OVER
-      B12503_divorces_last_year_by_sex_df <- get_acs(geography = "county", variables = c(B12503_male_total           = "B12503_002",
-                                                                                         B12503_male_never_married   = "B12503_003",
-                                                                                         B12503_male_ever_married    = "B12503_004",
-                                                                                         B12503_female_total         = "B12503_007",
-                                                                                         B12503_female_never_married = "B12503_008",
-                                                                                         B12503_female_ever_married  = "B12503_009"),
-                      year = 2020,) %>%
-        select(GEOID, variable, estimate) %>% 
-        spread(variable, estimate) %>% 
-        rename(fips = "GEOID")
-      
-      ############################################################################################################################################
-      
-      
+            
       ############################################################################################################################################
       ### https://api.census.gov/data/2019/acs/acs1/groups/B13002.html
       ## B13002_001	Estimate!!Total:
