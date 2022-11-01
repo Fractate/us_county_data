@@ -120,6 +120,8 @@ if(enable_clean_run || !file.exists("export.csv")) {
 } else {
     # read in cvs file to append additional columns
     df_lj <- read.csv(".\\export.csv", header=TRUE, stringsAsFactors=FALSE)
+    nrow(df_lj)
+    ncol(df_lj)
 }
 
 # grah rad and intersectin reatins
