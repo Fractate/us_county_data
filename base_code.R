@@ -114,7 +114,20 @@ if(enable_clean_run || !file.exists("export.csv")) {
     df_lj['road_length_per_intersect'] <- df_lj['roads_length_km'] /  df_lj['intersections']
     df_lj['population_density'] <- df_lj['population'] /  df_lj['area_land_sqkm']
     df_lj['intersects_per_population_density'] <- df_lj['intersects_per_road_length'] * df_lj['population_density']
-
+    
+    # # df_lj['fips_str'] <- toString(df_lj['fips'])
+    # for(i in 1:nrow(df_lj)) {
+    #     df_lj[i, 'fips_str'] <- toString(df_lj[i, 'fips'])
+    #     # df_lj[i, 'fips_str'] <- paste("'0", toString(df_lj[i, 'fips']), sep  = '')
+    #     # if(nchar(df_lj[i, 'fips_str']) == 4) {
+    #     if(str_length(df_lj[i, 'fips_str']) == 4) {
+    #         df_lj[i, 'fips_str'] <- paste('0', df_lj[i, 'fips_str'], sep  = '')
+    #     }
+    # }
+    # # if(nchar(df_lj[i, 'fips_str']) == 4) {
+    # if(str_length(df_lj[i, 'fips_str']) == 4) {
+    #     df_lj[i, 'fips_str'] <- paste('0', df_lj[i, 'fips_str'], sep  = '')
+    # }
 
     write.csv(df_lj,".\\export.csv", row.names = FALSE)
 } else {
