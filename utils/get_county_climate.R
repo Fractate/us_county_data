@@ -36,20 +36,26 @@ get_county_climate <- function() {
         df_lj <- left_join(df_lj, max_temp_annual_mean_df, by = c("Location.ID"="Location.ID"))
         df_lj <- left_join(df_lj, min_temp_annual_mean_df, by = c("Location.ID"="Location.ID"))
         
-        # Testing retrieving left and right string statements
-        str_sub(df_lj$Location.ID, 1, 2)
-        str_sub(df_lj$Location.ID, -3, -1)
+        # # Testing retrieving left and right string statements
+        # str_sub(df_lj$Location.ID, 1, 2)
+        # str_sub(df_lj$Location.ID, -3, -1)
+        # 
+        # # filter works for individual numbers, but not for string acronyms, that requires grepl
+        # state_fips_df %>% filter(st==5)
+        # 
+        # # Breaking down state acronym into fips state code
+        # state_fips_df %>% filter(grepl('GA', stusps))
+        # (state_fips_df%>%filter(grepl('GA', stusps)))['st']
+        # 
+        # df_lj['fips'] <- strtoi(paste((state_fips_df%>%filter(grepl(str_sub(df_lj$Location.ID, 1, 2), stusps)))['st'],
+        #                        str_sub(df_lj$Location.ID, -3, -1),
+        #                        sep = ''))
         
-                # filter works for individual numbers, but not for string acronyms, that requires grepl
-        state_fips_df %>% filter(st==5)
-        
-        # Breaking down state acronym into fips state code
-        state_fips_df %>% filter(grepl('GA', stusps))
-        (state_fips_df%>%filter(grepl('GA', stusps)))['st']
-        
-        df_lj['fips'] <- strtoi(paste((state_fips_df%>%filter(grepl(str_sub(df_lj$Location.ID, 1, 2), stusps)))['st'],
-                               str_sub(df_lj$Location.ID, -3, -1),
-                               sep = ''))
+        for(i in 1:nrow(df_lj)) {       # for-loop over rows
+          df_lj[i, 'fips'] <- strtoi(paste((state_fips_df%>%filter(grepl(str_sub(df_lj[i,'Location.ID'], 1, 2), stusps)))['st'],
+                                                                  str_sub(df_lj[i,'Location.ID'], -3, -1),
+                                                                  sep = ''))
+        }
         
         df_output <- df_lj[,c("fips", "precip_century_annual_mean_1901_2000", "avg_temp_annual_mean_1901_2000", "max_temp_annual_mean_1901_2000", "min_temp_annual_mean_1901_2000")]
 
