@@ -918,8 +918,13 @@ get_county_american_community_survey <- function() {
       # df_lj <- left_join(df_lj, B12007_median_age_first_marriage_by_sex_df, by = c("fips"="fips"))
       # df_lj <- left_join(df_lj, B12503_divorces_last_year_by_sex_df, by = c("fips"="fips"))
       df_lj <- left_join(df_lj, B13002_women_15_to_50_df, by = c("fips"="fips"))
-    
-      # cropping dataframe
+
+      # Screw it, jsut run the base code twice, reading the xcel retrieves fips as integers anyways
+      # # converting char fips to int
+      # # df_lj['fips'] <- strtoi(df_lj['fips'], base=10L)
+      # for(i in 1:nrow(df_lj)) {
+      #   df_lj[i, 'fips'] <- strtoi(df_lj[i, 'fips'], base=10L)
+      # }
       
       write.csv(df_lj,".\\get_county_american_community_survey.csv", row.names = FALSE)
 
