@@ -2,7 +2,7 @@
 # ############################################################################################################################################
 # FOLLOWING DATA DOES NOT RETRIEVE COUNTY LEVLE INFORMATION
 # ############################################################################################################################################
-# ### https://api.census.gov/data/2019/acs/acs1/groups/B12007.html
+# ### https://api.census.gov/data/2020/acs/acs1/groups/B12007.html
 # ## B12007_001	Estimate!!Median age at first marriage --!!Male
 # ## B12007_002	Estimate!!Median age at first marriage --!!Female
 # # B12007	MEDIAN AGE AT FIRST MARRIAGE
@@ -18,7 +18,7 @@
 # ############################################################################################################################################
 # THE FOLLOWING CODE DOES NOT RETRIEVE COUNTY LEVEL DATA
 # ############################################################################################################################################
-# ### https://api.census.gov/data/2019/acs/acs1/groups/B12503.html
+# ### https://api.census.gov/data/2020/acs/acs1/groups/B12503.html
 # ## B12503_002	Estimate!!Total:!!Male:
 # ## B12503_003	Estimate!!Total:!!Male:!!Never married
 # ## B12503_004	Estimate!!Total:!!Male:!!Ever married:
@@ -52,25 +52,25 @@
 
     # B08133	AGGREGATE TRAVEL TIME TO WORK (IN MINUTES) OF WORKERS BY TIME OF DEPARTURE TO GO TO WORK
     
-    ### https://api.census.gov/data/2019/acs/acs1/groups/B01001.html
+    ### https://api.census.gov/data/2020/acs/acs1/groups/B01001.html
     # B01001	SEX BY AGE
     ## B01001_002	Male:
     ## B01001_026	Female:
     
-    ### https://api.census.gov/data/2019/acs/acs1/groups/B01003.html
+    ### https://api.census.gov/data/2020/acs/acs1/groups/B01003.html
     # B01003	TOTAL POPULATION
     ## B01003_001	Total
     
-    ### https://api.census.gov/data/2019/acs/acs1/groups/B14001.html
+    ### https://api.census.gov/data/2020/acs/acs1/groups/B14001.html
     # B14001	SCHOOL ENROLLMENT BY LEVEL OF SCHOOL FOR THE POPULATION 3 YEARS AND OVER
     ## B14001_001	Total:
     ## B14001_002	Enrolled in school:
 
     # using B15002 instead because it compiles all male and female data (respectively) for all age over 25 instead of breaking it down into sub age groups in B15002
-    ### https://api.census.gov/data/2019/acs/acs1/groups/B15001.html
+    ### https://api.census.gov/data/2020/acs/acs1/groups/B15001.html
     # B15001	SEX BY AGE BY EDUCATIONAL ATTAINMENT FOR THE POPULATION 18 YEARS AND OVER
 
-    # ### https://api.census.gov/data/2019/acs/acs1/groups/B15002.html
+    # ### https://api.census.gov/data/2020/acs/acs1/groups/B15002.html
     # ## B15002_001	Estimate!!Total:
     # ## B15002_002	Estimate!!Total:!!Male:
     # ## B15002_003	Estimate!!Total:!!Male:!!No schooling completed
@@ -145,7 +145,7 @@
 
     
     # ##### NOT WORKING, COUNTY VALUES NOT FOUND
-    # ### https://data.census.gov/cedsci/table?q=S2602%3A%20CHARACTERISTICS%20OF%20THE%20GROUP%20QUARTERS%20POPULATION%20BY%20GROUP%20QUARTERS%20TYPE%20%283%20TYPES%29&g=0100000US&y=2019&tid=ACSST1Y2021.S2602
+    # ### https://data.census.gov/cedsci/table?q=S2602%3A%20CHARACTERISTICS%20OF%20THE%20GROUP%20QUARTERS%20POPULATION%20BY%20GROUP%20QUARTERS%20TYPE%20%283%20TYPES%29&g=0100000US&y=2020&tid=ACSST1Y2021.S2602
     # ### https://api.census.gov/data/2017/acs/acs5/subject/groups/S2602.html
     # ## S2602_C01_004E	Estimate!!Total population!!Total population!!SEX AND AGE!!Under 15 years
     # # S2602	CHARACTERISTICS OF THE GROUP QUARTERS POPULATION BY GROUP QUARTERS TYPE (3 TYPES)
@@ -483,8 +483,8 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://data.census.gov/cedsci/table?q=S2501&y=2019
-      ### https://api.census.gov/data/2019/acs/acs1/subject/groups/S2501.html
+      ### https://data.census.gov/cedsci/table?q=S2501&y=2020
+      ### https://api.census.gov/data/2020/acs/acs1/subject/groups/S2501.html
       ## S2501_C01_001	Estimate!!Occupied housing units!!Occupied housing units
       ## S2501_C01_032	Estimate!!Occupied housing units!!Occupied housing units!!FAMILY TYPE AND PRESENCE OF OWN CHILDREN!!With related children of householder under 18 years
       # S2501	OCCUPANCY CHARACTERISTICS
@@ -513,7 +513,7 @@ get_county_american_community_survey <- function() {
       ## S2502_C02_019	Estimate!!Percent occupied housing units!!Occupied housing units!!EDUCATIONAL ATTAINMENT OF HOUSEHOLDER!!High school graduate (includes equivalency)
       ## S2502_C02_020	Estimate!!Percent occupied housing units!!Occupied housing units!!EDUCATIONAL ATTAINMENT OF HOUSEHOLDER!!Some college or associate's degree
       ## S2502_C02_021	Estimate!!Percent occupied housing units!!Occupied housing units!!EDUCATIONAL ATTAINMENT OF HOUSEHOLDER!!Bachelor's degree or higher
-      ## S2502_C02_022	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 2019 or later
+      ## S2502_C02_022	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 2020 or later
       ## S2502_C02_023	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 2015 to 2018
       ## S2502_C02_024	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 2010 to 2014
       ## S2502_C02_025	Estimate!!Percent occupied housing units!!Occupied housing units!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Moved in 2000 to 2009
@@ -532,7 +532,7 @@ get_county_american_community_survey <- function() {
                                                                                         S2502_householder_education_highschool                 = "S2502_C02_019",
                                                                                         S2502_householder_education_some_college_or_associates = "S2502_C02_020",
                                                                                         S2502_householder_education_over_undergraduates        = "S2502_C02_021",
-                                                                                        S2502_household_moved_into_after_2019                  = "S2502_C02_022",
+                                                                                        S2502_household_moved_into_after_2020                  = "S2502_C02_022",
                                                                                         S2502_household_moved_into_2015_to_2018                = "S2502_C02_023",
                                                                                         S2502_household_moved_into_2010_to_2014                = "S2502_C02_024",
                                                                                         S2502_household_moved_into_2000_to_2009                = "S2502_C02_025",
@@ -546,7 +546,7 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://data.census.gov/cedsci/table?q=S2503&g=0100000US&y=2019
+      ### https://data.census.gov/cedsci/table?q=S2503&g=0100000US&y=2020
       ### https://api.census.gov/data/2017/acs/acs5/subject/groups/S2503.html
       
       ##### household income brackettotals
@@ -587,7 +587,7 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://data.census.gov/cedsci/table?q=S2503&g=0100000US&y=2019
+      ### https://data.census.gov/cedsci/table?q=S2503&g=0100000US&y=2020
       ### https://api.census.gov/data/2017/acs/acs5/subject/groups/S2503.html
       
       ##### percentage of income spent in housing costs per income brackets
@@ -644,7 +644,7 @@ get_county_american_community_survey <- function() {
       
       ############################################################################################################################################
       ### https://api.census.gov/data/2017/acs/acs5/subject/groups/S2801.html
-      ### https://data.census.gov/cedsci/table?q=S2801&g=0100000US&y=2019
+      ### https://data.census.gov/cedsci/table?q=S2801&g=0100000US&y=2020
       ## S2801_C02_002	Estimate!!Percent!!TYPES OF COMPUTER!!Has one or more types of computing devices
       ## S2801_C02_003	Estimate!!Percent!!TYPES OF COMPUTER!!Has one or more types of computing devices!!Desktop or laptop
       ## S2801_C02_005	Estimate!!Percent!!TYPES OF COMPUTER!!Has one or more types of computing devices!!Smartphone
@@ -667,8 +667,8 @@ get_county_american_community_survey <- function() {
       ############################################################################################################################################
       ##### NOTE - THERE ARE PERCENTAGES AS PER MORGAGE COSTS BUT I AM FOCUSING ONLY ON RENT FOR SIMPLICITIES SAKE
       ### https://api.census.gov/data/2018/acs/acs5/profile/variables.html
-      ### https://api.census.gov/data/2019/acs/acs5/profile/groups/DP04.html
-      ### https://data.census.gov/cedsci/table?q=DP04&y=2019
+      ### https://api.census.gov/data/2020/acs/acs5/profile/groups/DP04.html
+      ### https://data.census.gov/cedsci/table?q=DP04&y=2020
       
       ##### Vehicle Specific
       ## DP04_0057	Estimate!!VEHICLES AVAILABLE!!Occupied housing units
@@ -715,8 +715,8 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs5/profile/groups/DP05.html
-      ### https://data.census.gov/cedsci/table?q=DP05&y=2019
+      ### https://api.census.gov/data/2020/acs/acs5/profile/groups/DP05.html
+      ### https://data.census.gov/cedsci/table?q=DP05&y=2020
       ## DP05_0005P	Percent!!SEX AND AGE!!Total population!!Under 5 years
       ## DP05_0006P	Percent!!SEX AND AGE!!Total population!!5 to 9 years
       ## DP05_0007P	Percent!!SEX AND AGE!!Total population!!10 to 14 years
@@ -756,8 +756,8 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B08121.html
-      ### https://data.census.gov/cedsci/table?q=B08121&y=2019
+      ### https://api.census.gov/data/2020/acs/acs1/groups/B08121.html
+      ### https://data.census.gov/cedsci/table?q=B08121&y=2020
       ## B08121_001	Total:
       ## B08121_002	Car, truck, or van - drove alone
       ## B08121_003	Car, truck, or van - carpooled
@@ -782,7 +782,8 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B09001.html
+      ### https://data.census.gov/cedsci/table?q=B11012&y=2020
+      ### https://api.census.gov/data/2020/acs/acs1/groups/B09001.html
       ## B09001_002	Estimate!!Total:!!In households:
       ## B09001_003	Estimate!!Total:!!In households:!!Under 3 years
       ## B09001_004	Estimate!!Total:!!In households:!!3 and 4 years
@@ -810,8 +811,8 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://data.census.gov/cedsci/table?q=B11012&y=2019
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B11012.html
+      ### https://data.census.gov/cedsci/table?q=B11012&y=2020
+      ### https://api.census.gov/data/2020/acs/acs1/groups/B11012.html
       ## B11012_001	Estimate!!Total:
       ## B11012_003	Estimate!!Total:!!Married-couple household:!!With own children under 18 years
       ## B11012_006	Estimate!!Total:!!Cohabiting couple household:!!With own children of the householder under 18 years
@@ -832,7 +833,7 @@ get_county_american_community_survey <- function() {
       
       
       ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B11016.html
+      ### https://api.census.gov/data/2020/acs/acs1/groups/B11016.html
       ## B11016_002	Estimate!!Total:!!Family households:
       ## B11016_003	Estimate!!Total:!!Family households:!!2-person household
       ## B11016_004	Estimate!!Total:!!Family households:!!3-person household
@@ -857,7 +858,7 @@ get_county_american_community_survey <- function() {
       
             
       ############################################################################################################################################
-      ### https://api.census.gov/data/2019/acs/acs1/groups/B13002.html
+      ### https://api.census.gov/data/2020/acs/acs1/groups/B13002.html
       ## B13002_001	Estimate!!Total:
       ## B13002_002	Estimate!!Total:!!Women who had a birth in the past 12 months:
       # B13002	WOMEN 15 TO 50 YEARS WHO HAD A BIRTH IN THE PAST 12 MONTHS BY MARITAL STATUS AND AGE
