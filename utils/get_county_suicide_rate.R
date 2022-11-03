@@ -22,7 +22,9 @@ get_county_suicide_rate <- function() {
         
         # Rename Columns
         colnames(df)  <- c("fips", "suicide_deaths", "suicide_data_total_population", "suicide_rate_per_100k")
-        
+        df <- lapply(df, gsub, pattern = "Suppressed", replacement = "NA", fixed = TRUE)
+        df <- lapply(df, gsub, pattern = "Unreliable", replacement = "NA", fixed = TRUE)
+
         # Rename Columns
         write.csv(df,".\\get_county_suicide_rate.csv", row.names = FALSE)
 
