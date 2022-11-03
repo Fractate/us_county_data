@@ -565,19 +565,19 @@ get_county_american_community_survey <- function() {
       ## S2503_C02_013	Estimate!!Occupied housing units!!Occupied housing units!!HOUSEHOLD INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Median household income (dollars)
       
       # S2503  FINANCIAL CHARACTERISTICS
-      S2503_household_count_per_income_bracket_df <- get_acs(geography = "county", variables = c(S2503_households_percemt_total                        = "S2503_C02_001",
-                                                                                                 S2503_households_percemt_with_income_under_5000       = "S2503_C02_002",
-                                                                                                 S2503_households_percemt_with_income_5000_to_10000    = "S2503_C02_003",
-                                                                                                 S2503_households_percemt_with_income_10000_to_15000   = "S2503_C02_004",
-                                                                                                 S2503_households_percemt_with_income_15000_to_20000   = "S2503_C02_005",
-                                                                                                 S2503_households_percemt_with_income_20000_to_25000   = "S2503_C02_006",
-                                                                                                 S2503_households_percemt_with_income_25000_to_35000   = "S2503_C02_007",
-                                                                                                 S2503_households_percemt_with_income_35000_to_50000   = "S2503_C02_008",
-                                                                                                 S2503_households_percemt_with_income_50000_to_75000   = "S2503_C02_009",
-                                                                                                 S2503_households_percemt_with_income_75000_to_100000  = "S2503_C02_010",
-                                                                                                 S2503_households_percemt_with_income_100000_to_150000 = "S2503_C02_011",
-                                                                                                 S2503_households_percemt_with_income_over_150000      = "S2503_C02_012",
-                                                                                                 S2503_households_percemt_median_income                = "S2503_C02_013"),
+      S2503_household_count_per_income_bracket_df <- get_acs(geography = "county", variables = c(S2503_households_percent_total                        = "S2503_C02_001",
+                                                                                                 S2503_households_percent_with_income_under_5000       = "S2503_C02_002",
+                                                                                                 S2503_households_percent_with_income_5000_to_10000    = "S2503_C02_003",
+                                                                                                 S2503_households_percent_with_income_10000_to_15000   = "S2503_C02_004",
+                                                                                                 S2503_households_percent_with_income_15000_to_20000   = "S2503_C02_005",
+                                                                                                 S2503_households_percent_with_income_20000_to_25000   = "S2503_C02_006",
+                                                                                                 S2503_households_percent_with_income_25000_to_35000   = "S2503_C02_007",
+                                                                                                 S2503_households_percent_with_income_35000_to_50000   = "S2503_C02_008",
+                                                                                                 S2503_households_percent_with_income_50000_to_75000   = "S2503_C02_009",
+                                                                                                 S2503_households_percent_with_income_75000_to_100000  = "S2503_C02_010",
+                                                                                                 S2503_households_percent_with_income_100000_to_150000 = "S2503_C02_011",
+                                                                                                 S2503_households_percent_with_income_over_150000      = "S2503_C02_012",
+                                                                                                 S2503_households_percent_median_income                = "S2503_C02_013"),
                                               year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
         spread(variable, estimate) %>% 
@@ -775,7 +775,7 @@ get_county_american_community_survey <- function() {
                                                                                                 B08121_median_income_work_from_home  = "B08121_007"),
                       year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
-        spread(variable, estimate) %>% 
+        spread(vfariable, estimate) %>% 
         rename(fips = "GEOID")
       
       ############################################################################################################################################

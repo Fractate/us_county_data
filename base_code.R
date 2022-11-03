@@ -12,6 +12,7 @@ source(".\\\\..\\utils\\get_county_pollution.R")
 source(".\\\\..\\utils\\get_county_naics.R")
 source(".\\\\..\\utils\\get_county_climate.R")
 source(".\\\\..\\utils\\get_county_american_community_survey.R")
+source(".\\\\..\\utils\\get_county_suicide_rate.R")
 
 # source(".\\\\..\\utils\\get_county_road_data_tiger.R")
 
@@ -92,6 +93,13 @@ if(enable_clean_run || !file.exists("export.csv")) {
     print(tail(df_county_american_community_survey))
     print(names(df_county_american_community_survey)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
 
+
+    # retrieve county suicide rates
+    df_county_suicide_rate <- get_county_suicide_rate()
+    print(head(df_county_american_community_survey))
+    print(tail(df_county_american_community_survey))
+    print(names(df_county_american_community_survey)) # fips # state_fips # county_fips # poverty_percentage # median_household_income
+
     # ### Joins
     # # Filter for the counties that match between the list of county population and county tiger files and populate population column
     # # df_lj <- left_join(df, df_county_pop_cropped, by = c("X[[i]]"="GEOID"))
@@ -104,9 +112,11 @@ if(enable_clean_run || !file.exists("export.csv")) {
     df_lj <- left_join(df_lj, df_county_naics, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_climate, by = c("fips"="fips"))
     df_lj <- left_join(df_lj, df_county_american_community_survey, by = c("fips"="fips"))
+    df_lj <- left_join(df_lj, df_county_suicide_rate, by = c("fips"="fips"))
 
     ### CONVERT METERES TO KILOMETERS
     df_lj['area_land_sqkm'] <- df_lj['area_land_sqm'] / 1000000
+    df_lj['sqrt_area_land_sqkm'] <- sqrt(df_lj['area_land_sqkm'])
     df_lj['roads_length_km'] <- df_lj['roads_length_m'] / 1000
 
     ### CALCULATE THE ROAD DENSITY AND SUCH HERE
