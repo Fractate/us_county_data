@@ -124,7 +124,7 @@ if(enable_clean_run || !file.exists("export.csv")) {
     df_lj['road_length_per_intersect'] <- df_lj['roads_length_km'] /  df_lj['intersections']
     df_lj['population_density'] <- df_lj['population'] /  df_lj['area_land_sqkm']
     df_lj['intersects_per_population_density'] <- df_lj['intersects_per_road_length'] * df_lj['population_density']
-    
+
     # # df_lj['fips_str'] <- toString(df_lj['fips'])
     # for(i in 1:nrow(df_lj)) {
     #     df_lj[i, 'fips_str'] <- toString(df_lj[i, 'fips'])
@@ -169,9 +169,4 @@ print(names(df_lj))
 # # 5) Do Analysis
 # # at this point, there should be a dataframe with population, length of road, total intersections between the roads, total land area of each county
 
-
 # ## The census data align at the county level by using County FIPS Codes. This is the State Code + County Code for 5 digit number
-
-
-
-

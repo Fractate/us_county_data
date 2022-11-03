@@ -21,12 +21,12 @@ get_county_suicide_rate <- function() {
         df <- df[,c("County.Code", "Deaths", "Population", "Crude.Rate")]
         
         # Rename Columns
-        colnames(df)  <- c("fips", "deaths", "population", "deaths_per_100k")
+        colnames(df)  <- c("fips", "suicide_deaths", "suicide_data_total_population", "suicide_rate_per_100k")
         
         # Rename Columns
-        write.csv(df_fips,".\\get_county_suicide_rate.csv", row.names = FALSE)
+        write.csv(df,".\\get_county_suicide_rate.csv", row.names = FALSE)
 
-        return(df_fips)
+        return(df)
     }
     else {
         # read in cvs file to append additional columns

@@ -775,7 +775,7 @@ get_county_american_community_survey <- function() {
                                                                                                 B08121_median_income_work_from_home  = "B08121_007"),
                       year = 2020,) %>%
         select(GEOID, variable, estimate) %>% 
-        spread(vfariable, estimate) %>% 
+        spread(variable, estimate) %>% 
         rename(fips = "GEOID")
       
       ############################################################################################################################################
