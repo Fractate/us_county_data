@@ -1,10 +1,23 @@
 # # Processes data download from tiger website
 # https://www2.census.gov/geo/tiger/TIGER2020/ROADS/
 
+
+# libraries
+library(bea.R) # Using Data from Bureau of Economic Analyis
+library(rvest)
+library(tools)
+library(sf) # zip and unzip files
+library(fs) # file systems, allows the usage of file_create()
+library("stringr") # allows the use of "left" and "right" string manipulations
+library(tidyverse) # allows the usage of left_join
+
+
 # Function name is 
 get_county_list_road_data <- function(enable_data_proc) {
     if(!file.exists("get_county_list_road_data.csv")) {
 
+      
+      
       ### Most updated code change - retrieving data from 2019 data
       ### code that is run is only within this function for adhoc fix
         enable_data_proc = TRUE
@@ -60,6 +73,10 @@ get_county_list_road_data <- function(enable_data_proc) {
             write.csv(df_output,".\\get_county_list_road_data.csv", row.names = FALSE)
         }
   
+        
+        
+        
+        
         ### ADHOC FIX ENDS HERE
         
         return(df_output)
@@ -109,7 +126,7 @@ get_county_road_data <- function(zip_file_name, enable_data_proc) {
     # Set naming string variables
   shapefile_website_text <- "https://www2.census.gov/geo/tiger/TIGER2014/ROADS/"
   # shapefile_website_text <- "https://www2.census.gov/geo/tiger/TIGER2019/ROADS/"
-  # shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
+  # shapefile_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
     origin_website_zip_file_link <- paste(shapefile_website_text, zip_file_name, sep = "")
     zip_file_name_converted_to_shp <- paste(file_path_sans_ext(zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
     zip_file_name_converted_to_shx <- paste(file_path_sans_ext(zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
