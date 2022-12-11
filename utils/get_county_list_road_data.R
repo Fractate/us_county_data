@@ -5,7 +5,12 @@
 get_county_list_road_data <- function(enable_data_proc) {
     if(!file.exists("get_county_list_road_data.csv")) {
 
-        html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
+      ### Most updated code change - retrieving data from 2019 data
+      ### code that is run is only within this function for adhoc fix
+        enable_data_proc = TRUE
+        html <- read_html("https://www2.census.gov/geo/tiger/TIGER2014/ROADS/")
+        # html <- read_html("https://www2.census.gov/geo/tiger/TIGER2019/ROADS/")
+        # html <- read_html("https://www2.census.gov/geo/tiger/TIGER2020/ROADS/")
 
         tiger_county_list <- html %>% html_element("table") %>% html_table()
 
@@ -21,8 +26,8 @@ get_county_list_road_data <- function(enable_data_proc) {
         # 4 to nrow(tiger_county_list)-1 filters out empty row entries
         # for(i in 3:6){
         # subtracting 89 more to account only 56000 and before aka 50 states of usa
-        # for(i in 3:(nrow(tiger_county_list) - 1 - 89)){
-        for(i in 3:4){
+        for(i in 3:(nrow(tiger_county_list) - 1 - 89)){
+        # for(i in 3:4){
 
             # returns column of zip file names found in the US Census Tiger data
             print("tiger_county_list[i,2]")
@@ -55,6 +60,8 @@ get_county_list_road_data <- function(enable_data_proc) {
             write.csv(df_output,".\\get_county_list_road_data.csv", row.names = FALSE)
         }
   
+        ### ADHOC FIX ENDS HERE
+        
         return(df_output)
 
         
@@ -100,8 +107,10 @@ get_county_list_road_data <- function(enable_data_proc) {
 get_county_road_data <- function(zip_file_name, enable_data_proc) {
     
     # Set naming string variables
-    shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
-    origin_website_zip_file_link <- paste(shapefile_2020_website_text, zip_file_name, sep = "")
+  shapefile_website_text <- "https://www2.census.gov/geo/tiger/TIGER2014/ROADS/"
+  # shapefile_website_text <- "https://www2.census.gov/geo/tiger/TIGER2019/ROADS/"
+  # shapefile_2020_website_text <- "https://www2.census.gov/geo/tiger/TIGER2020/ROADS/"
+    origin_website_zip_file_link <- paste(shapefile_website_text, zip_file_name, sep = "")
     zip_file_name_converted_to_shp <- paste(file_path_sans_ext(zip_file_name), ".shp", sep="") # shp and shx files must be used in tandem
     zip_file_name_converted_to_shx <- paste(file_path_sans_ext(zip_file_name), ".shx", sep="") # file_path_sans_ext(a) removes extensions from file names
     zip_file_name_converted_to_dbf <- paste(file_path_sans_ext(zip_file_name), ".dbf", sep="") # file_path_sans_ext(a) removes extensions from file names
